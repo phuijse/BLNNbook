@@ -43,7 +43,8 @@ En este curso se estudiarán técnicas de programación probabilística que esca
 
 1. K. P. Murphy, "Machine Learning: A probabilistic perspective", MIT Press, 2012
 1. S. Theodoridis, "Machine Learning: A Bayesian and optimization perspective", Academic Press, 2015
-1. A. Kendall and Y. Gal, ["What uncertainties do we need in bayesian deep learning for computer vision?"](https://arxiv.org/pdf/1703.04977.pdf), NIPS 2017, 
+1. A. Kendall and Y. Gal, ["What uncertainties do we need in bayesian deep learning for computer vision?"](https://arxiv.org/pdf/1703.04977.pdf), NIPS 2017
+1. [INFO343: Redes Neuronales](https://docs.google.com/presentation/d/1IJ2n8X4w8pvzNLmpJB-ms6-GDHWthfsJTFuyUqHfXg8/edit?usp=sharing)
 
 ***
 
