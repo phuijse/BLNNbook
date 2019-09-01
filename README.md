@@ -36,14 +36,14 @@ En este curso se estudiarán técnicas de programación probabilística que esca
 ### Principal
 1. D. Barber, "Bayesian reasoning and machine learning", Cambridge University Press, 2012, [**Libre!**](http://www.cs.ucl.ac.uk/staff/d.barber/brml/)
 1. D. J. C. MacKay, "Information theory, inference and learning algorithms", Cambridge University Press, 2003, [**Libre!**](http://www.inference.org.uk/itprnn/book.html)
-1. D. M. Blei, A. Kucukelbir, and J.D. McAuliffe. "Variational inference: A review for statisticians." Journal of the American Statistical Association 112(518), 859-877, 2017
-1. D. Kingma, “Variational inference and deep learning: a new synthesis”, PhD thesis, University of Amsterdam, 2015
+1. D. M. Blei, A. Kucukelbir, and J.D. McAuliffe. ["Variational inference: A review for statisticians"](https://arxiv.org/pdf/1601.00670.pdf) Journal of the American Statistical Association 112(518), 859-877, 2017
+1. D. P. Kingma, ["Variational inference and deep learning: a new synthesis"](http://dpkingma.com/), PhD thesis, University of Amsterdam, 2015
 
 ### Complementaria
 
 1. K. P. Murphy, "Machine Learning: A probabilistic perspective", MIT Press, 2012
 1. S. Theodoridis, "Machine Learning: A Bayesian and optimization perspective", Academic Press, 2015
-1. A. Kendall and Y. Gal, “What uncertainties do we need in bayesian deep learning for computer vision?”, NIPS 2017, https://arxiv.org/pdf/1703.04977.pdf
+1. A. Kendall and Y. Gal, ["What uncertainties do we need in bayesian deep learning for computer vision?"](https://arxiv.org/pdf/1703.04977.pdf), NIPS 2017, 
 
 ***
 
