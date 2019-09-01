@@ -53,7 +53,7 @@ En este curso se estudiarán técnicas de programación probabilística que esca
 - Ambiente: [IPython](https://ipython.org), [Jupyter](https://jupyter.org/)
 - Librerías [PyTorch](https://pytorch.org/), [PyMC3](https://docs.pymc.io/)
 
-#### (Recomendando) Ambiente de programación
+#### (Recomendando) Montar ambiente de programación
 
 Linux:
 - Descargar e instalar *miniconda* de 64bits para Python 3.7: https://docs.conda.io/en/latest/miniconda.html
@@ -70,10 +70,10 @@ Linux:
     conda update --all
     ```
 - Crear ambiente INFO3XX
-```
+    ```
     conda create -n INFO3XX
     conda activate INFO3XX
-```
+    ```
 - Instalar Jupyter y PyTorch
     - Versión CPU
     ```
