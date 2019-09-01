@@ -58,25 +58,35 @@ En este curso se estudiarán técnicas de programación probabilística que esca
 Linux:
 - Descargar e instalar *miniconda* de 64bits para Python 3.7: https://docs.conda.io/en/latest/miniconda.html
 - Cargar variables de entorno (en este caso se instaló en home del usuario: 
+    ```
     source ~/miniconda3/etc/profile.d/conda.sh
+    ```
 - Activar ambiente base
+    ```
     conda activate
+    ```
 - Actualizar ambiente
+    ```
     conda update --all
+    ```
 - Crear ambiente INFO3XX
+```
     conda create -n INFO3XX
     conda activate INFO3XX
+```
 - Instalar Jupyter y PyTorch
     - Versión CPU
-    
-        conda install pip ipython jupyter mathjax pytorch-cpu==1.2.0
-        
+    ```
+         conda install pip ipython jupyter mathjax pytorch-cpu==1.2.0 
+    ```
     -Versión GPU
-        
+    ```    
         conda install pip ipython jupyter mathjax pytorch==1.2.0
+    ```
 - Instalar Pyro (solo a través de pip)
-    
+    ```
     pip install pyro-ppl
+    ```
 
 
 
