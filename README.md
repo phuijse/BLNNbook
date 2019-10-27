@@ -16,13 +16,13 @@ In this course we will study probabilistic programming techniques that scale to 
 ## Contents
 
 - **Unit 1:** Fundamentals
-    - [Probabilities and Inference](0_probabilities_inference.ipynb)
-    - [Information Theory](2_function_approximators_neural_networks.ipynb)
-    - [Function approximators and neural_networks](2_function_approximators_neural_networks.ipynb)
+    - [Probabilities and inference](0_probabilities_inference.ipynb)
+    - [Information theory](2_function_approximators_neural_networks.ipynb)
+    - [Function approximators and neural networks](2_function_approximators_neural_networks.ipynb)
 - **Unit 2:** Variational Inference (VI) and Bayesian Neural Networks
-    - [Approximate Inference](3_approximate_inference.ipynb)
-    - [Our first Bayesian Neural Net with Pyro](4_first_bayesian_nn_with_pyro.ipynb)
-    - [Variational Autoencoder](5_variational_autoencoder.ipynb) 
+    - [Approximate inference](3_approximate_inference.ipynb)
+    - [Our first bayesian neural network with pyro](4_first_bayesian_nn_with_pyro.ipynb)
+    - [Variational autoencoder](5_variational_autoencoder.ipynb) 
         - VAE condicional [(K. Sohn, 2016)](https://papers.nips.cc/paper/5775-learning-structured-output-representation-using-deep-conditional-generative-models) y semi-supervisado [(DP. Kingma, 2014)](https://arxiv.org/abs/1406.5298)
         - Avances recientes [(Y. Burda, 2016)](https://arxiv.org/abs/1509.00519) [(L. Maaloe, 2016)](https://arxiv.org/abs/1602.05473) [(T. Rainford, 2018)](https://arxiv.org/abs/1802.04537)
 - **Unit 3:** Gaussian Processes
@@ -36,11 +36,11 @@ In this course we will study probabilistic programming techniques that scale to 
 1. D. P. Kingma, ["Variational inference and deep learning: a new synthesis"](http://dpkingma.com/), PhD thesis, University of Amsterdam, 2015
 1. D. M. Blei, A. Kucukelbir, and J.D. McAuliffe. ["Variational inference: A review for statisticians"](https://arxiv.org/pdf/1601.00670.pdf) Journal of the American Statistical Association 112(518), 859-877, 2017
 
-### Complementary
+#### Complementary
 
 1. K. P. Murphy, "Machine Learning: A probabilistic perspective", MIT Press, 2012
 1. S. Theodoridis, "Machine Learning: A Bayesian and optimization perspective", Academic Press, 2015
-1. [INFO343: Redes Neuronales](https://docs.google.com/presentation/d/1IJ2n8X4w8pvzNLmpJB-ms6-GDHWthfsJTFuyUqHfXg8/edit?usp=sharing)
+1. [Slides for INFO343: Redes Neuronales](https://docs.google.com/presentation/d/1IJ2n8X4w8pvzNLmpJB-ms6-GDHWthfsJTFuyUqHfXg8/edit?usp=sharing)
 
 ***
 
