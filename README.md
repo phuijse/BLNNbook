@@ -58,10 +58,15 @@ In this course we will study probabilistic programming techniques that scale to 
     ```
     source ~/miniconda3/etc/profile.d/conda.sh
     ```
-- Create an environment with the provided file
-    ```
-    conda env create -f environment.yml
-    ```
+- Create environment. Do I have a nice and shiny NVIDIA GPU?
+    - YES
+        ```
+        conda env create -f environment_gpu.yml
+        ```
+    - NO
+        ```
+        conda env create -f environment_cpu.yml
+        ```
 - Activate environment
     ```
     conda activate pyro-env
