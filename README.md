@@ -25,7 +25,8 @@ In this course we will study probabilistic programming techniques that scale to 
     - [Variational autoencoder](5_variational_autoencoder.ipynb) 
         - VAE condicional [(K. Sohn, 2016)](https://papers.nips.cc/paper/5775-learning-structured-output-representation-using-deep-conditional-generative-models) y semi-supervisado [(DP. Kingma, 2014)](https://arxiv.org/abs/1406.5298)
         - Avances recientes [(Y. Burda, 2016)](https://arxiv.org/abs/1509.00519) [(L. Maaloe, 2016)](https://arxiv.org/abs/1602.05473) [(T. Rainford, 2018)](https://arxiv.org/abs/1802.04537)
-- **Unit 3:** Gaussian Processes
+- **Unit 3:** 
+    - [Gaussian Processes](7_nonparametric_bayesian.ipynb)
 
 ***
 ## References 
