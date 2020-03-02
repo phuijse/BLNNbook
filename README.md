@@ -1,6 +1,6 @@
 ## Universidad Austral de Chile
 
-# INFO3XX: Neural Networks and Bayesian Learning
+# INFO320: Neural Networks and Bayesian Learning
 
 ### Pablo Huijse H, phuijse@inf.uach.cl
 
