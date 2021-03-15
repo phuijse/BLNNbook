@@ -2,7 +2,7 @@
 
 # INFO320: Neural Networks and Bayesian Learning
 
-### Pablo Huijse H, phuijse@inf.uach.cl
+### Pablo Huijse H, phuijse at inf dot uach dot cl
 
 An elective course at the Master o Informatics (MIN) of the Universidad Austral de Chile. Please mantain a local copy of this repository
 
@@ -11,48 +11,48 @@ An elective course at the Master o Informatics (MIN) of the Universidad Austral 
 
 In this course we will study probabilistic programming techniques that scale to massive datasets (Variational Inference), starting from the fundamentals and also reviewing existing implementations with emphasis on training deep neural network models that have a Bayesian interpretation. The objective is to present the student with the state of the art that lays at the intersection between the fields of Bayesian models and Deep Learning through lectures, paper reviews and practical exercises in Python (Pytorch plus Pyro)
 
-
+<!-- #region -->
 ***
 ## Contents
 
 - **Unit 1:** Fundamentals
-    - [Probabilities and inference](0_probabilities_inference.ipynb)
-    - [Information theory](2_function_approximators_neural_networks.ipynb)
-    - [Function approximators and neural networks](2_function_approximators_neural_networks.ipynb)
-- **Unit 2:** Variational Inference (VI) and Bayesian Neural Networks
-    - [Approximate inference](3_approximate_inference.ipynb)
-    - [Our first bayesian neural network with pyro](4_first_bayesian_nn_with_pyro.ipynb)
-    - [Variational autoencoder](5_variational_autoencoder.ipynb) 
-        - VAE condicional [(K. Sohn, 2016)](https://papers.nips.cc/paper/5775-learning-structured-output-representation-using-deep-conditional-generative-models) y semi-supervisado [(DP. Kingma, 2014)](https://arxiv.org/abs/1406.5298)
-        - Avances recientes [(Y. Burda, 2016)](https://arxiv.org/abs/1509.00519) [(L. Maaloe, 2016)](https://arxiv.org/abs/1602.05473) [(T. Rainford, 2018)](https://arxiv.org/abs/1802.04537)
-- **Unit 3:** 
-    - [Gaussian Processes](7_nonparametric_bayesian.ipynb)
+    - [Probabilities and inference](lectures/01_fundamentals/01_probabilities_inference.ipynb)
+    - [Information theory and generative models](lectures/01_fundamentals/02_information_theory.ipynb)
+    - [Bayesian Linear Regression](lectures/01_fundamentals/03_linear_regression.ipynb)
+    - [Function approximators and neural networks](lectures/01_fundamentals/04_neural_networks.ipynb)
+- **Unit 2:** Bayesian Neural Networks
+- **Unit 3:** Advanced/recent topics
 
 ***
 ## References 
 
-1. D. Barber, "Bayesian reasoning and machine learning", Cambridge University Press, 2012, [**Libre!**](http://www.cs.ucl.ac.uk/staff/d.barber/brml/)
-1. D. J. C. MacKay, "Information theory, inference and learning algorithms", Cambridge University Press, 2003, [**Libre!**](http://www.inference.org.uk/itprnn/book.html)
-1. Y. Gal, ["Uncertainty in Deep Learning"](http://www.cs.ox.ac.uk/people/yarin.gal/website/), PhD thesis, University of Cambridge, 2015
-1. D. P. Kingma, ["Variational inference and deep learning: a new synthesis"](http://dpkingma.com/), PhD thesis, University of Amsterdam, 2015
-1. D. M. Blei, A. Kucukelbir, and J.D. McAuliffe. ["Variational inference: A review for statisticians"](https://arxiv.org/pdf/1601.00670.pdf) Journal of the American Statistical Association 112(518), 859-877, 2017
+### Mandatory:
 
-#### Complementary
+1. Barber, D. (2012). [Bayesian reasoning and machine learning](http://www.cs.ucl.ac.uk/staff/d.barber/brml/). Cambridge University Press.
+1. MacKay, D. J. (2003). [Information theory, inference and learning algorithms](http://www.inference.org.uk/mackay/itila/book.html). Cambridge university press.
 
-1. K. P. Murphy, "Machine Learning: A probabilistic perspective", MIT Press, 2012
-1. S. Theodoridis, "Machine Learning: A Bayesian and optimization perspective", Academic Press, 2015
-1. [Slides for INFO343: Redes Neuronales](https://docs.google.com/presentation/d/1IJ2n8X4w8pvzNLmpJB-ms6-GDHWthfsJTFuyUqHfXg8/edit?usp=sharing)
+### Suggested:
+
+1. Blei, D. M., Kucukelbir, A., & McAuliffe, J. D. (2017). [Variational inference: A review for statisticians.](https://arxiv.org/abs/1601.00670) Journal of the American statistical Association, 112(518), 859-877.
+1. Jospin, L. V., Buntine, W., Boussaid, F., Laga, H., & Bennamoun, M. (2020). [Hands-on Bayesian Neural Networks--a Tutorial for Deep Learning Users](https://arxiv.org/abs/2007.06823). arXiv preprint arXiv:2007.06823.
+1. [Deep Bayes Moscow 2019](https://www.youtube.com/watch?v=SPgRVzfnESQ&list=PLe5rNUydzV9QHe8VDStpU0o8Yp63OecdW&index=2)
+
+
+### Complementary
+
+1. Murphy, K. P. (2012). Machine learning: a probabilistic perspective. MIT press.
+1. Theodoridis, S. (2015). Machine learning: a Bayesian and optimization perspective. Academic press.
+
 
 ***
-
 ## Software and Libraries
 
 - Programming language: [Python3](https://docs.python.org/3/)
 - Development environment: [IPython](https://ipython.org) and [Jupyter](https://jupyter.org/)
 - Libraries: [PyTorch](https://pytorch.org/) and [Pyro](http://pyro.ai/)
+<!-- #endregion -->
 
-#### (Recommended) Installation using conda
-
+### (Recommended) Installation using conda
 
 - Install 64bits *miniconda* for Python 3.7: https://docs.conda.io/en/latest/miniconda.html
 - Add conda to path (depends on where you installed it) 
@@ -76,10 +76,4 @@ In this course we will study probabilistic programming techniques that scale to 
     ```
     jupyter notebook
     ```
-
-***
-## Other resources
-
-
-- [Programa del curso](https://docs.google.com/document/d/1EAEhxEz6LEDu7ux7NlD-ZLFRBq8fE-pxhkJf7W5y6JU/edit)
 
