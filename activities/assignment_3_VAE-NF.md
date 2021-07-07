@@ -5,11 +5,12 @@
 **Requirements:**
 
 - Use `torchvision.datasets.MNIST` to obtain the training and test data. Use digits 4 and 9 only (discard the others)
-- Propose an architecture for this dataset and implement a VAE with a mean-field posterior. This will be the base model. 
-- Implement a more flexible posterior for VAE using conditional normalizing flows, consider a compositions based on planar flows and a neural spline flows (groups of two select only one flow). 
-- Compare the models in terms of ELBO, KL and reconstruction error as a function of the number of latent variables (consider at least 2 and 10), type of transformation and the length of the flow (consider at least 1, 2 and 5). 
+- Propose an architecture for this dataset and implement a VAE with a mean-field posterior. This will be the base model.
+- Implement a more flexible posterior for VAE using conditional normalizing flows, consider compositions based on planar flows and neural spline flows (groups of two select only one flow).
+- Compare the models in terms of ELBO, KL and reconstruction error as a function of the number of latent variables (consider at least 2 and 10), type of transformation and the length of the flow (consider at least 1, 2 and 5).
 - Using a latent dimensionality of two, visualize the approximate posteriors and the generative space (see VAE lecture)
-- Discuss your results! 
+- Discuss your results!
+
 
 
 **References**
@@ -20,7 +21,7 @@
 
 **Deadline**
 
-23:59, July 20th, 2021
+23:59, July 21th, 2021
 
 ```python
 
