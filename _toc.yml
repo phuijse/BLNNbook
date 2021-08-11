@@ -1,0 +1,27 @@
+format: jb-book
+root: README
+parts:
+  - caption: Fundamentals
+    numbered: true
+    chapters:
+    - file: lectures/01_fundamentals/01_probabilities_inference
+#    - file: lectures/01_fundamentals/02_information_theory
+#    - file: lectures/01_fundamentals/03_linear_regression
+#    - file: lectures/01_fundamentals/04_neural_networks
+#  - caption: Bayesian neural networks with `pyro`
+#    numbered: true
+#    chapters:
+#     - file: lectures/02_bayesian_neural_networks/01_pyro_basics
+#     - file: lectures/02_bayesian_neural_networks/02_gaussian_processes
+#     - file: lectures/02_bayesian_neural_networks/03_approximate_inference
+#     - file: lectures/02_bayesian_neural_networks/04_pyro_svi
+#     - file: lectures/02_bayesian_neural_networks/05_variational_autoencoder
+#     - file: lectures/02_bayesian_neural_networks/06_fully_bayesian_nn
+#  - caption: Recent advances
+#    numbered: true
+#    chapters:
+#     - file: lectures/03_advanced_topics/01_advances_in_VI-Copy1
+#     - file: lectures/03_advanced_topics/02_more_on_BNN
+#     - file: lectures/03_advanced_topics/03_normalizing_flows
+#     - file: lectures/03_advanced_topics/04_further_study
+   
