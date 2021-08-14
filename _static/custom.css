@@ -1,0 +1,11 @@
+img {
+	display:block;
+	margin-left: auto;
+	margin-right: auto
+}
+
+iframe{ 
+	display: block;
+	margin: 0 auto;
+	border: 0;
+}
