@@ -19,7 +19,7 @@ html:
 
 sphinx:
   config:
-    language: es
+    language: en
     myst_enable_extensions: 
     - amsmath
     - colon_fence
