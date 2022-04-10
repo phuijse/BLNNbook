@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>INFO320: Neural Networks and Bayesian Learning &#8212; Neural Networks and Bayesian Learning</title>
+    <title>Neural Networks and Bayesian Learning &#8212; Neural Networks and Bayesian Learning</title>
     
-  <link href="_static/css/theme.css" rel="stylesheet" />
-  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -32,29 +32,34 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1. Probabilities and inference" href="lectures/01_fundamentals/01_probabilities_inference.html" />
+    <link rel="next" title="1. Probabilities and inference" href="chapters/fundamentals/probabilities.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -71,7 +76,6 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="index.html">
       
-      <img src="_static/logo.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Neural Networks and Bayesian Learning</h1>
@@ -80,17 +84,22 @@
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p class="caption">
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Fundamentals
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="lectures/01_fundamentals/01_probabilities_inference.html">
+  <a class="reference internal" href="chapters/fundamentals/probabilities.html">
    1. Probabilities and inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/fundamentals/inference.html">
+   2. Statistical Inference
   </a>
  </li>
 </ul>
@@ -139,11 +148,27 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
             <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phuijse/NNBL"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phuijse/NNBL/issues/new?title=Issue%20on%20page%20%2FREADME.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
 
             <!-- Full screen (wrap in <a> to have style consistency -->
 
@@ -157,129 +182,50 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#abstract">
-   Abstract
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#contents">
-   Contents
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#references">
-   References
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#mandatory">
-     Mandatory:
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#suggested">
-     Suggested:
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#complementary">
-     Complementary
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#software-and-libraries">
-   Software and Libraries
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#recommended-installation">
-     Recommended installation
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Neural Networks and Bayesian Learning</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <div class="section" id="info320-neural-networks-and-bayesian-learning">
-<h1>INFO320: Neural Networks and Bayesian Learning<a class="headerlink" href="#info320-neural-networks-and-bayesian-learning" title="Permalink to this headline">¶</a></h1>
-<p>An elective course at the <a class="reference external" href="http://magister.inf.uach.cl/">Master o Informatics (MIN) of the Universidad Austral de Chile</a></p>
-<p>Professor: Pablo Huijse H, phuijse at inf dot uach dot cl</p>
-<div class="section" id="abstract">
-<h2>Abstract<a class="headerlink" href="#abstract" title="Permalink to this headline">¶</a></h2>
-<p>In this course we will study probabilistic programming techniques that scale to massive datasets (Variational Inference), starting from the fundamentals and also reviewing existing implementations with emphasis on training deep neural network models that have a Bayesian interpretation. The objective is to present the student with the state of the art that lays at the intersection between the fields of Bayesian models and Deep Learning through lectures, paper reviews and practical exercises in Python (Pytorch plus Pyro)</p>
-</div>
-<div class="section" id="contents">
-<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><strong>Unit 1:</strong> <span class="xref myst">Fundamentals</span></p></li>
-<li><p><strong>Unit 2:</strong> <span class="xref myst">Bayesian Neural Networks</span></p></li>
-<li><p><strong>Unit 3:</strong> <span class="xref myst">Advanced/recent topics</span></p></li>
-</ul>
-</div>
-<div class="section" id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="mandatory">
-<h3>Mandatory:<a class="headerlink" href="#mandatory" title="Permalink to this headline">¶</a></h3>
+  <div class="tex2jax_ignore mathjax_ignore section" id="neural-networks-and-bayesian-learning">
+<h1>Neural Networks and Bayesian Learning<a class="headerlink" href="#neural-networks-and-bayesian-learning" title="Permalink to this headline">¶</a></h1>
+<p>A ebook on Neural Networks and Bayesian Learning made for the students of the INFO320 course at the <a class="reference external" href="http://magister.inf.uach.cl/">Master on INformatics (MIN) program, UACh</a></p>
+<p>This book is published at <a class="reference external" href="http://phuijse.github.io/phuijse/NNBL">http://phuijse.github.io/phuijse/NNBL</a> and it sources can be found at <a class="reference external" href="http://github.com/phuijse/NNBL">http://github.com/phuijse/NNBL</a></p>
+<p>This book is constantly evolving. Feel free to contact me via phuijse at inf dot uach dot cl or by writing issues in this repo</p>
+<p><strong>Course abstract</strong></p>
+<p>In this course we will study probabilistic programming techniques that scale to massive datasets (Variational Inference), starting from the fundamentals and also reviewing existing implementations with emphasis on training deep neural network models that have a Bayesian interpretation. The objective is to present the student with the state of the art that lays at the intersection between the fields of Bayesian models and Deep Learning through lectures, paper reviews and practical exercises in Python</p>
+<p><strong>References</strong></p>
+<p>For a deeper theoretical view on the topics found in this book I recommend:</p>
 <ul class="simple">
 <li><p>Barber, D. (2012). <a class="reference external" href="http://www.cs.ucl.ac.uk/staff/d.barber/brml/">Bayesian reasoning and machine learning</a>. Cambridge University Press.</p></li>
 <li><p>MacKay, D. J. (2003). <a class="reference external" href="http://www.inference.org.uk/mackay/itila/book.html">Information theory, inference and learning algorithms</a>. Cambridge university press.</p></li>
 </ul>
-</div>
-<div class="section" id="suggested">
-<h3>Suggested:<a class="headerlink" href="#suggested" title="Permalink to this headline">¶</a></h3>
+<p>For more a technical view I suggest reading/watching:</p>
 <ul class="simple">
 <li><p>Blei, D. M., Kucukelbir, A., &amp; McAuliffe, J. D. (2017). <a class="reference external" href="https://arxiv.org/abs/1601.00670">Variational inference: A review for statisticians.</a> Journal of the American statistical Association, 112(518), 859-877.</p></li>
 <li><p>Jospin, L. V., Buntine, W., Boussaid, F., Laga, H., &amp; Bennamoun, M. (2020). <a class="reference external" href="https://arxiv.org/abs/2007.06823">Hands-on Bayesian Neural Networks–a Tutorial for Deep Learning Users</a>. arXiv preprint arXiv:2007.06823.</p></li>
 <li><p><a class="reference external" href="https://www.youtube.com/watch?v=SPgRVzfnESQ&amp;list=PLe5rNUydzV9QHe8VDStpU0o8Yp63OecdW&amp;index=2">Deep Bayes Moscow 2019</a></p></li>
 </ul>
-</div>
-<div class="section" id="complementary">
-<h3>Complementary<a class="headerlink" href="#complementary" title="Permalink to this headline">¶</a></h3>
+<p>And if need a more generla view on Machine Learning I suggest:</p>
 <ul class="simple">
 <li><p>Murphy, K. P. (2012). Machine learning: a probabilistic perspective. MIT press.</p></li>
 <li><p>Theodoridis, S. (2015). Machine learning: a Bayesian and optimization perspective. Academic press.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="software-and-libraries">
-<h2>Software and Libraries<a class="headerlink" href="#software-and-libraries" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Programming language: <a class="reference external" href="https://docs.python.org/3/">Python3</a></p></li>
-<li><p>Development environment: <a class="reference external" href="https://ipython.org">IPython</a> and <a class="reference external" href="https://jupyter.org/">Jupyter</a></p></li>
-<li><p>Libraries: <a class="reference external" href="https://pytorch.org/">PyTorch</a> and <a class="reference external" href="http://pyro.ai/">Pyro</a></p></li>
-</ul>
-<div class="section" id="recommended-installation">
-<h3>Recommended installation<a class="headerlink" href="#recommended-installation" title="Permalink to this headline">¶</a></h3>
-<p>To run these notebooks I recommend creating a conda environment, installing pytorch from the pytorch conda channel and installing <code class="docutils literal notranslate"><span class="pre">pyro</span></code> using pip</p>
-<p>If you have a GPU you can copy and paste the following</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda create -n <span class="s2">&quot;info320&quot;</span>
-conda install -c pyviz holoviews bokeh
-conda install -c pytorch pytorch cudatoolkit ignite
-conda install scipy scikit-learn selenium 
-pip install pyro-ppl
-</pre></div>
-</div>
-</div>
-</div>
 <div class="toctree-wrapper compound">
 </div>
 </div>
@@ -306,32 +252,35 @@ pip install pyro-ppl
 
               </div>
               
-        
-        <div class='prev-next-bottom'>
             
-    <a class='right-next' id="next-link" href="lectures/01_fundamentals/01_probabilities_inference.html" title="next page"><span class="section-number">1. </span>Probabilities and inference</a>
-
-        </div>
-        
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='right-next' id="next-link" href="chapters/fundamentals/probabilities.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Probabilities and inference</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Pablo Huijse Heise<br/>
-        
-      </p>
-    </div>
-  </footer>
+    <footer class="footer">
+  <p>
+    
+      By Pablo Huijse Heise<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>
