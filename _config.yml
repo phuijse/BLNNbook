@@ -1,31 +1,25 @@
 # Book settings
 title: Neural Networks and Bayesian Learning
-author: Pablo Huijse Heise 
-logo: logo.png
+author: Pablo Huijse Heise
+copyright: "2022"
+#logo: logo.png
 only_build_toc_files: true
-exclude_patterns : [_build, "**.ipynb_checkpoints"]
 
 execute:
-  execute_notebooks: cache
-  allow_errors: true
-  timeout: 360
-
+  execute_notebooks: off
 
 repository:
-  url: https://github.com/magister-informatica-uach/INFO147
+  url: https://github.com/phuijse/NNBL
 
 html:
   home_page_in_navbar: false
-  use_repository_button: false
-  use_issues_button: false
+  use_repository_button: true
+  use_issues_button: true
   use_edit_page_button: false
-  only_build_toc_files: true
 
 sphinx:
-  extra_extensions: [bokeh.sphinxext.bokeh_plot]
   config:
-    html_show_copyright: false
-    language: en
+    language: es
     myst_enable_extensions: 
     - amsmath
     - colon_fence
@@ -36,7 +30,5 @@ sphinx:
     - replacements
     - smartquotes
     - substitution
+    - html_admonition
 
-latex:
-  latex_documents:
-    targetname: book.tex

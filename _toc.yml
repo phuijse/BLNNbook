@@ -4,7 +4,8 @@ parts:
   - caption: Fundamentals
     numbered: true
     chapters:
-    - file: lectures/01_fundamentals/01_probabilities_inference
+    - file: chapters/fundamentals/probabilities
+    - file: chapters/fundamentals/inference
 #    - file: lectures/01_fundamentals/02_information_theory
 #    - file: lectures/01_fundamentals/03_linear_regression
 #    - file: lectures/01_fundamentals/04_neural_networks
