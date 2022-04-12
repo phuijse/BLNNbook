@@ -23,7 +23,7 @@ For more a technical view I suggest reading/watching:
 - Jospin, L. V., Buntine, W., Boussaid, F., Laga, H., & Bennamoun, M. (2020). [Hands-on Bayesian Neural Networks--a Tutorial for Deep Learning Users](https://arxiv.org/abs/2007.06823). arXiv preprint arXiv:2007.06823.
 - [Deep Bayes Moscow 2019](https://www.youtube.com/watch?v=SPgRVzfnESQ&list=PLe5rNUydzV9QHe8VDStpU0o8Yp63OecdW&index=2)
 
-And if need a more generla view on Machine Learning I suggest:
+And if need a more general view on Machine Learning I suggest:
 - Murphy, K. P. (2012). Machine learning: a probabilistic perspective. MIT press.
 - Theodoridis, S. (2015). Machine learning: a Bayesian and optimization perspective. Academic press.
 
