@@ -2,7 +2,7 @@
 
 A ebook on Neural Networks and Bayesian Learning made for the students of the INFO320 course at the [Master on INformatics (MIN) program, UACh](http://magister.inf.uach.cl/)
 
-This book is published at http://phuijse.github.io/phuijse/NNBL and it sources can be found at http://github.com/phuijse/NNBL 
+This book is published at http://phuijse.github.io/NNBL and it sources can be found at http://github.com/phuijse/NNBL 
 
 This book is constantly evolving. Feel free to contact me via phuijse at inf dot uach dot cl or by writing issues in this repo
 
