@@ -56,6 +56,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="5. Bayesian Linear Regression" href="linear_regression.html" />
     <link rel="prev" title="3. Information Theoretic Quantities" href="information_theory.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
@@ -112,6 +113,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    4. Matching probabilistic models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="linear_regression.html">
+   5. Bayesian Linear Regression
   </a>
  </li>
 </ul>
@@ -2426,7 +2432,7 @@ D_{\text{KL}} \left [ p^*(x) || p_\theta(x) \right] = \mathbb{E}_{x \sim p^*(x)}
 </div>
 </div>
 <p>The evolution of the parameters:</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">param</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span>
 <span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span>
@@ -2934,6 +2940,13 @@ D_{\text{KL}}\left [ p_\theta(x) || p^*(x) \right] &amp;= \int p_\theta(x) \log 
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title"><span class="section-number">3. </span>Information Theoretic Quantities</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="linear_regression.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Bayesian Linear Regression</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             
