@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3. Information Theoretic Quantities &#8212; Neural Networks and Bayesian Learning</title>
+    <title>Information Theoretic Quantities &#8212; Neural Networks and Bayesian Learning</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet">
   <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -56,8 +56,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="4. Matching probabilistic models" href="generative_models.html" />
-    <link rel="prev" title="2. Statistical Inference" href="inference.html" />
+    <link rel="next" title="Matching probabilistic models" href="generative_models.html" />
+    <link rel="prev" title="Statistical Inference" href="inference.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -89,35 +89,35 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Fundamentals
- </span>
-</p>
-<ul class="current nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="probabilities.html">
-   1. Probabilities
+   Probabilities
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inference.html">
-   2. Statistical Inference
+   Statistical Inference
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   3. Information Theoretic Quantities
+   Information Theoretic Quantities
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="generative_models.html">
-   4. Matching probabilistic models
+   Matching probabilistic models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="linear_regression.html">
-   5. Bayesian Linear Regression
+   Bayesian Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../numpyro/numpyro_basics.html">
+   NumPyro Basics
   </a>
  </li>
 </ul>
@@ -226,17 +226,17 @@ const thebe_selector_output = ".output, .cell_output"
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#how-can-we-measure-information">
-   3.1. How can we measure information?
+   How can we measure information?
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#shannons-entropy">
-   3.2. Shannon’s entropy
+   Shannon’s entropy
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#relative-entropy-kullback-leibler-kl-divergence">
-   3.3. Relative Entropy: Kullback-Leibler (KL) divergence
+   Relative Entropy: Kullback-Leibler (KL) divergence
   </a>
  </li>
 </ul>
@@ -261,17 +261,17 @@ const thebe_selector_output = ".output, .cell_output"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#how-can-we-measure-information">
-   3.1. How can we measure information?
+   How can we measure information?
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#shannons-entropy">
-   3.2. Shannon’s entropy
+   Shannon’s entropy
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#relative-entropy-kullback-leibler-kl-divergence">
-   3.3. Relative Entropy: Kullback-Leibler (KL) divergence
+   Relative Entropy: Kullback-Leibler (KL) divergence
   </a>
  </li>
 </ul>
@@ -284,10 +284,10 @@ const thebe_selector_output = ".output, .cell_output"
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="information-theoretic-quantities">
-<h1><span class="section-number">3. </span>Information Theoretic Quantities<a class="headerlink" href="#information-theoretic-quantities" title="Permalink to this headline">¶</a></h1>
+<h1>Information Theoretic Quantities<a class="headerlink" href="#information-theoretic-quantities" title="Permalink to this headline">¶</a></h1>
 <p>The following presents key concepts of Information Theory that will be used later to train generative models</p>
 <div class="section" id="how-can-we-measure-information">
-<h2><span class="section-number">3.1. </span>How can we measure information?<a class="headerlink" href="#how-can-we-measure-information" title="Permalink to this headline">¶</a></h2>
+<h2>How can we measure information?<a class="headerlink" href="#how-can-we-measure-information" title="Permalink to this headline">¶</a></h2>
 <p>Information Theory is the mathematical study of the quantification and transmission of information proposed by <strong>Claude Shannon</strong> on this seminal work: <em>A Mathematical Theory of Communication</em>, 1948</p>
 <p>Shannon considered the output of a noisy source as a random variable <span class="math notranslate nohighlight">\(X\)</span></p>
 <ul class="simple">
@@ -330,7 +330,7 @@ I(x_i) = \log_2 \frac{1}{p_i},
 </div>
 </div>
 <div class="section" id="shannons-entropy">
-<h2><span class="section-number">3.2. </span>Shannon’s entropy<a class="headerlink" href="#shannons-entropy" title="Permalink to this headline">¶</a></h2>
+<h2>Shannon’s entropy<a class="headerlink" href="#shannons-entropy" title="Permalink to this headline">¶</a></h2>
 <p>After defining the amount of information for a state Shannon’s defined the average information of the source <span class="math notranslate nohighlight">\(X\)</span> as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -363,7 +363,7 @@ H(p) = - \int p(x) \log p(x) \,dx ~ \text{[nats]}
 <p>where <span class="math notranslate nohighlight">\(p(x)\)</span> is the probability density function (pdf) of <span class="math notranslate nohighlight">\(X\)</span></p>
 </div>
 <div class="section" id="relative-entropy-kullback-leibler-kl-divergence">
-<h2><span class="section-number">3.3. </span>Relative Entropy: Kullback-Leibler (KL) divergence<a class="headerlink" href="#relative-entropy-kullback-leibler-kl-divergence" title="Permalink to this headline">¶</a></h2>
+<h2>Relative Entropy: Kullback-Leibler (KL) divergence<a class="headerlink" href="#relative-entropy-kullback-leibler-kl-divergence" title="Permalink to this headline">¶</a></h2>
 <p>Consider a continuous random variable <span class="math notranslate nohighlight">\(X\)</span> and two distributions <span class="math notranslate nohighlight">\(q(x)\)</span> and <span class="math notranslate nohighlight">\(p(x)\)</span> defined on its probability space</p>
 <p>The relative entropy between these distributions is</p>
 <div class="math notranslate nohighlight">
@@ -452,13 +452,13 @@ D_{\text{KL}} \left [ p(x) || q(x) \right] \neq D_{\text{KL}} \left [ q(x) || p(
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">2. </span>Statistical Inference</p>
+            <p class="prev-next-title">Statistical Inference</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="generative_models.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">4. </span>Matching probabilistic models</p>
+        <p class="prev-next-title">Matching probabilistic models</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

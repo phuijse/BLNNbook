@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1. Probabilities &#8212; Neural Networks and Bayesian Learning</title>
+    <title>Probabilities &#8212; Neural Networks and Bayesian Learning</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet">
   <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -56,7 +56,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2. Statistical Inference" href="inference.html" />
+    <link rel="next" title="Statistical Inference" href="inference.html" />
     <link rel="prev" title="Neural Networks and Bayesian Learning" href="../../README.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
@@ -89,35 +89,35 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Fundamentals
- </span>
-</p>
-<ul class="current nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   1. Probabilities
+   Probabilities
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inference.html">
-   2. Statistical Inference
+   Statistical Inference
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="information_theory.html">
-   3. Information Theoretic Quantities
+   Information Theoretic Quantities
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="generative_models.html">
-   4. Matching probabilistic models
+   Matching probabilistic models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="linear_regression.html">
-   5. Bayesian Linear Regression
+   Bayesian Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../numpyro/numpyro_basics.html">
+   NumPyro Basics
   </a>
  </li>
 </ul>
@@ -226,12 +226,12 @@ const thebe_selector_output = ".output, .cell_output"
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#basic-concepts-from-probability-theory">
-   1.1. Basic concepts from probability theory
+   Basic concepts from probability theory
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#frequentism-and-bayesianism-the-meaning-of-probability">
-   1.2. Frequentism and Bayesianism: The meaning of probability
+   Frequentism and Bayesianism: The meaning of probability
   </a>
  </li>
 </ul>
@@ -256,12 +256,12 @@ const thebe_selector_output = ".output, .cell_output"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#basic-concepts-from-probability-theory">
-   1.1. Basic concepts from probability theory
+   Basic concepts from probability theory
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#frequentism-and-bayesianism-the-meaning-of-probability">
-   1.2. Frequentism and Bayesianism: The meaning of probability
+   Frequentism and Bayesianism: The meaning of probability
   </a>
  </li>
 </ul>
@@ -2251,10 +2251,10 @@ roTBs2RqAAAAAElFTkSuQmCC'
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="probabilities">
-<h1><span class="section-number">1. </span>Probabilities<a class="headerlink" href="#probabilities" title="Permalink to this headline">¶</a></h1>
+<h1>Probabilities<a class="headerlink" href="#probabilities" title="Permalink to this headline">¶</a></h1>
 <p>Disclaimer: This chapter is not comprehensive. It only works as a summary of the fundamental concepts from probability theory and statistical inference needed in this course</p>
 <div class="section" id="basic-concepts-from-probability-theory">
-<h2><span class="section-number">1.1. </span>Basic concepts from probability theory<a class="headerlink" href="#basic-concepts-from-probability-theory" title="Permalink to this headline">¶</a></h2>
+<h2>Basic concepts from probability theory<a class="headerlink" href="#basic-concepts-from-probability-theory" title="Permalink to this headline">¶</a></h2>
 <dl class="simple myst">
 <dt>Random Variable (RV)</dt><dd><p>A variable that we assign to the output of a random phenomenon</p>
 </dd>
@@ -2479,7 +2479,7 @@ P(x, y|z)  = P(x|z)P(y|z)
 \]</div>
 </div>
 <div class="section" id="frequentism-and-bayesianism-the-meaning-of-probability">
-<h2><span class="section-number">1.2. </span>Frequentism and Bayesianism: The meaning of probability<a class="headerlink" href="#frequentism-and-bayesianism-the-meaning-of-probability" title="Permalink to this headline">¶</a></h2>
+<h2>Frequentism and Bayesianism: The meaning of probability<a class="headerlink" href="#frequentism-and-bayesianism-the-meaning-of-probability" title="Permalink to this headline">¶</a></h2>
 <p><strong>Meaning 1:</strong> We observe the outcome of a random experiment (event) several times and we count</p>
 <p>We flip a coin 5 times and get [x, x, o, x, o]</p>
 <ul class="simple">
@@ -2549,7 +2549,7 @@ P(x, y|z)  = P(x|z)P(y|z)
     <a class='right-next' id="next-link" href="inference.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">2. </span>Statistical Inference</p>
+        <p class="prev-next-title">Statistical Inference</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

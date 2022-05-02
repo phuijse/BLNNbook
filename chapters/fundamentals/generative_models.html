@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>4. Matching probabilistic models &#8212; Neural Networks and Bayesian Learning</title>
+    <title>Matching probabilistic models &#8212; Neural Networks and Bayesian Learning</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet">
   <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -56,8 +56,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="5. Bayesian Linear Regression" href="linear_regression.html" />
-    <link rel="prev" title="3. Information Theoretic Quantities" href="information_theory.html" />
+    <link rel="next" title="Bayesian Linear Regression" href="linear_regression.html" />
+    <link rel="prev" title="Information Theoretic Quantities" href="information_theory.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -89,35 +89,35 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Fundamentals
- </span>
-</p>
-<ul class="current nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="probabilities.html">
-   1. Probabilities
+   Probabilities
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inference.html">
-   2. Statistical Inference
+   Statistical Inference
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="information_theory.html">
-   3. Information Theoretic Quantities
+   Information Theoretic Quantities
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   4. Matching probabilistic models
+   Matching probabilistic models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="linear_regression.html">
-   5. Bayesian Linear Regression
+   Bayesian Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../numpyro/numpyro_basics.html">
+   NumPyro Basics
   </a>
  </li>
 </ul>
@@ -226,17 +226,17 @@ const thebe_selector_output = ".output, .cell_output"
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#probabilistic-generative-models">
-   4.1. Probabilistic Generative Models
+   Probabilistic Generative Models
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#forward-kl-matching">
-   4.2. Forward KL matching
+   Forward KL matching
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#reverse-kl-matching">
-   4.3. Reverse KL matching
+   Reverse KL matching
   </a>
  </li>
 </ul>
@@ -261,17 +261,17 @@ const thebe_selector_output = ".output, .cell_output"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#probabilistic-generative-models">
-   4.1. Probabilistic Generative Models
+   Probabilistic Generative Models
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#forward-kl-matching">
-   4.2. Forward KL matching
+   Forward KL matching
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#reverse-kl-matching">
-   4.3. Reverse KL matching
+   Reverse KL matching
   </a>
  </li>
 </ul>
@@ -2260,9 +2260,9 @@ roTBs2RqAAAAAElFTkSuQmCC'
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="matching-probabilistic-models">
-<h1><span class="section-number">4. </span>Matching probabilistic models<a class="headerlink" href="#matching-probabilistic-models" title="Permalink to this headline">¶</a></h1>
+<h1>Matching probabilistic models<a class="headerlink" href="#matching-probabilistic-models" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="probabilistic-generative-models">
-<h2><span class="section-number">4.1. </span>Probabilistic Generative Models<a class="headerlink" href="#probabilistic-generative-models" title="Permalink to this headline">¶</a></h2>
+<h2>Probabilistic Generative Models<a class="headerlink" href="#probabilistic-generative-models" title="Permalink to this headline">¶</a></h2>
 <p>Let’s say we have <span class="math notranslate nohighlight">\(N\)</span> i.i.d. observations</p>
 <div class="math notranslate nohighlight">
 \[
@@ -2305,7 +2305,7 @@ x_i \sim p^*(x)
 <p>In what follows we will explore how to use the KL divergence for generative model matching/fitting</p>
 </div>
 <div class="section" id="forward-kl-matching">
-<h2><span class="section-number">4.2. </span>Forward KL matching<a class="headerlink" href="#forward-kl-matching" title="Permalink to this headline">¶</a></h2>
+<h2>Forward KL matching<a class="headerlink" href="#forward-kl-matching" title="Permalink to this headline">¶</a></h2>
 <p>The <strong>forward</strong> KL divergence between the underlying distribution and the proposed model is</p>
 <div class="math notranslate nohighlight">
 \[
@@ -2716,7 +2716,7 @@ D_{\text{KL}} \left [ p^*(x) || p_\theta(x) \right] = \int p^*(x) \log \frac{p^*
 </div></blockquote>
 </div>
 <div class="section" id="reverse-kl-matching">
-<h2><span class="section-number">4.3. </span>Reverse KL matching<a class="headerlink" href="#reverse-kl-matching" title="Permalink to this headline">¶</a></h2>
+<h2>Reverse KL matching<a class="headerlink" href="#reverse-kl-matching" title="Permalink to this headline">¶</a></h2>
 <p>The reverse KL between our model and the underlying distribution is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -2938,13 +2938,13 @@ D_{\text{KL}}\left [ p_\theta(x) || p^*(x) \right] &amp;= \int p_\theta(x) \log 
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">3. </span>Information Theoretic Quantities</p>
+            <p class="prev-next-title">Information Theoretic Quantities</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="linear_regression.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">5. </span>Bayesian Linear Regression</p>
+        <p class="prev-next-title">Bayesian Linear Regression</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
