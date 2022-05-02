@@ -1,15 +1,13 @@
 format: jb-book
 root: README
-parts:
-  - caption: Fundamentals
-    numbered: true
-    chapters:
-    - file: chapters/fundamentals/probabilities
-    - file: chapters/fundamentals/inference
-    - file: chapters/fundamentals/information_theory
-    - file: chapters/fundamentals/generative_models
-    - file: chapters/fundamentals/linear_regression
-#    - file: lectures/01_fundamentals/04_neural_networks
+chapters:
+- file: chapters/fundamentals/probabilities
+- file: chapters/fundamentals/inference
+- file: chapters/fundamentals/information_theory
+- file: chapters/fundamentals/generative_models
+- file: chapters/fundamentals/linear_regression
+- file: chapters/numpyro/numpyro_basics
+  #    - file: lectures/01_fundamentals/04_neural_networks
 #  - caption: Bayesian neural networks with `pyro`
 #    numbered: true
 #    chapters:
