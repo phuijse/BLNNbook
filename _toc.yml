@@ -7,7 +7,7 @@ chapters:
 - file: chapters/fundamentals/generative_models
 - file: chapters/fundamentals/linear_regression
 - file: chapters/numpyro_basics
-- file: chapters/neural_networks
+- file: chapters/neural_networks_flax
 - file: chapters/approx_inference
 #    - file: lectures/01_fundamentals/04_neural_networks
 #  - caption: Bayesian neural networks with `pyro`
