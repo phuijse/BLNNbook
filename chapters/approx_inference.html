@@ -266,11 +266,6 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#self-study">
-   Self-study
-  </a>
- </li>
 </ul>
 
             </nav>
@@ -313,11 +308,6 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#self-study">
-   Self-study
-  </a>
- </li>
 </ul>
 
                         </nav>
@@ -334,21 +324,25 @@ const thebe_selector_output = ".output, .cell_output"
 \[
 p(\mathcal{D}|\mathcal{M}_i) = \int p(\mathcal{D}|\mathcal{M}_i, \theta) p(\theta| \mathcal{M}_i) d\theta
 \]</div>
-<p>is intractable:</p>
+<p>is intractable, <em>i.e</em> either the integral has no closed-form or the dimensionality is so big that numerical integration is not feasible</p>
+<blockquote>
+<div><p>If the evidence is intractable then the posterior is also intractable</p>
+</div></blockquote>
+<p>In these cases we resort to approximations</p>
 <ul class="simple">
-<li><p>The integral has no closed-form</p></li>
-<li><p>The dimensionality is so big that numerical integration is not feasible</p></li>
-</ul>
-<p>If the evidence is intractable then the posterior is also intractable</p>
-<p>In these cases we resort to stochastic or deterministic approximations</p>
-<ul class="simple">
-<li><p><strong>Stochastic:</strong> For example Markov Chain Monte Carlo, which is computationally demanding (for complex models) but produces asymptotically exact samples from the intractable distribution</p></li>
-<li><p><strong>Deterministic:</strong> For example Variational Inference, which scales better than MCMC but it is not exact. Instead of samples we get a direct approximation of the intractable distribution</p></li>
+<li><p><strong>Stochastic approximation:</strong> For example Markov Chain Monte Carlo (MCMC). MCMC is computationally demanding (for complex models) but produces asymptotically exact samples from the intractable distribution</p></li>
+<li><p><strong>Deterministic approximation:</strong> For example Variational Inference (VI). VI is more efficient than MCMC, but it is not asymptotically exact. Instead of samples we get a direct approximation of the intractable distribution</p></li>
 </ul>
 <p>The main topic of this lecture is deterministic approximations</p>
 <div class="section" id="the-laplace-approximation">
 <h2>The Laplace Approximation<a class="headerlink" href="#the-laplace-approximation" title="Permalink to this headline">¶</a></h2>
-<p>In this deterministic approximation we first propose a function of  <span class="math notranslate nohighlight">\(\theta \in \mathbb{R}^K\)</span> such that</p>
+<p>In Bayesian statistics, the Laplace approximation refers to the application of <a class="reference external" href="https://en.wikipedia.org/wiki/Pierre-Simon_Laplace">Laplace</a>’s method to approximate an intractable integral (evidence) using a Gaussian distribution</p>
+<p>In particular, Laplace’s method is a technique to solve integrals of the form</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = \int e^{g(\theta)} d\theta,
+\]</div>
+<p>by defining the auxiliary function as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{split}
@@ -357,60 +351,51 @@ g(\theta) &amp;= \log  p(\mathcal{D}| \theta) p(\theta)  \\
 &amp;= \sum_{i=1}^N \log p(x_i |\theta) + \log   p(\theta) 
 \end{split}
 \end{split}\]</div>
-<p>and then perform a second order Taylor expansion around <span class="math notranslate nohighlight">\(\theta= \hat \theta_{\text{map}}\)</span> (the MAP solution)</p>
+<p>then <span class="math notranslate nohighlight">\(f(x)\)</span> is equivalent to the evidence.</p>
+<p>The “approximation” consists of performing a second order Taylor expansion of <span class="math notranslate nohighlight">\(g(\theta)\)</span> around <span class="math notranslate nohighlight">\(\theta= \hat \theta_{\text{map}}\)</span>, i.e. the MAP solution. The result of this is</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{align}
-g(\theta) \approx g(\hat \theta_{\text{map}}) &amp;+ (\theta - \hat \theta_{\text{map}})^T \frac{dg}{d\theta}\bigg \rvert_{\theta=\hat \theta_{\text{map}}} \nonumber \\
-&amp;+ \frac{1}{2} (\theta - \hat \theta_{\text{map}})^T \frac{d^2 g}{d\theta^2} \bigg \rvert_{\theta=\hat \theta_{\text{map}}} (\theta - \hat \theta_{\text{map}})
-\end{align}
-\end{split}\]</div>
+\[
+g(\theta) \approx  g(\hat \theta_{\text{map}}) -  \frac{1}{2} (\theta - \hat \theta_{\text{map}})^T \Lambda (\theta - \hat \theta_{\text{map}})
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+\Lambda = -\frac{d^2 g}{d\theta^2} (\hat \theta_{\text{map}}),
+\]</div>
+<p>is the negative Hessian evaluated at <span class="math notranslate nohighlight">\(\hat \theta_{\text{map}}\)</span></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>By definition the first derivative evaluated at <span class="math notranslate nohighlight">\(\hat \theta_{\text{map}}\)</span> is zero</p>
+<p>By definition the first derivative of <span class="math notranslate nohighlight">\(g(\theta)\)</span> evaluated at <span class="math notranslate nohighlight">\(\hat \theta_{\text{map}}\)</span> is zero</p>
 </div>
-<p>We will call the negative Hessian evaluated at <span class="math notranslate nohighlight">\(\hat \theta_{\text{map}}\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\Lambda = -\frac{d^2 g}{d\theta^2} (\hat \theta_{\text{map}})
-\]</div>
-<p>With this we can rewrite the approximation as</p>
-<div class="math notranslate nohighlight">
-\[
-g(\theta) \approx g(\hat \theta_{\text{map}}) - \frac{1}{2} (\theta - \hat \theta_{\text{map}})^T \Lambda (\theta - \hat \theta_{\text{map}})
-\]</div>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>We have “Gaussianized” the approximation, where <span class="math notranslate nohighlight">\(\Lambda\)</span> is the precision matrix (inverse covariance)</p>
-</div>
-<p>If we plug the Gaussian approximation into the evidence we can now solve the integral</p>
+<p>If we plug the Gaussian approximation back into the evidence we can now solve the integral as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{split}
-p(\mathcal{D}) &amp;\approx  e^{g(\hat \theta_{\text{map}})} \int e^{-  \frac{1}{2} (\theta - \hat \theta_{\text{map}})^T \Lambda (\theta - \hat \theta_{\text{map}})} d\theta  \\
+p(\mathcal{D}) &amp;\approx  e^{g(\hat \theta_{\text{map}})} \int e^{-\frac{1}{2} (\theta - \hat \theta_{\text{map}})^T \Lambda (\theta - \hat \theta_{\text{map}})} d\theta  \\
 &amp;= e^{g(\hat \theta_{\text{map}})} (2\pi)^{K/2} |\Lambda|^{-1/2}
 \end{split}
 \end{split}\]</div>
-<p>and also the posterior</p>
+<p>where <span class="math notranslate nohighlight">\(K\)</span> is the dimensionality of <span class="math notranslate nohighlight">\(\theta\)</span>. With this the posterior is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align}
-p(\theta| \mathcal{D}) &amp;= \frac{p(\mathcal{D}|\theta) p(\theta) }{p(\mathcal{D})} \nonumber \\
+\begin{split}
+p(\theta| \mathcal{D}) &amp;= \frac{p(\mathcal{D}|\theta) p(\theta) }{p(\mathcal{D})}  = \frac{e^{ g(\theta)}}{\int e^{ g(\theta)} d\theta} = \\
 &amp;\approx \frac{1}{(2\pi)^{K/2} |\Lambda|^{-1/2}} e^{-  \frac{1}{2} (\theta - \hat \theta_{\text{map}})^T \Lambda (\theta - \hat \theta_{\text{map}})} 
-\end{align}
+\end{split}
 \end{split}\]</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>Laplace’s method approximates the posterior by a <strong>Multivariate Gaussian</strong> centered on the MAP.</p>
 </div>
-<p>We should ask ourselves if the Gaussian is adequate to approximate the distribution we are interested. Also note that Laplace’s method might not be the “best” gaussian fit to our distribution</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>As the following figure shows, Laplace’s method might not be the “best” gaussian fit to our distribution</p>
+</div>
 <a class="reference internal image-reference" href="../_images/laplace_vs_vi.png"><img alt="../_images/laplace_vs_vi.png" src="../_images/laplace_vs_vi.png" style="width: 400px;" /></a>
-<p>The picture shows a non-gaussian posterior in yellow. The red line corresponds to a gaussian centered on the mode (Laplace), while the green line corresponds to a gaussian with minimum reverse KL divergence to the posterior</p>
+<p>A non-gaussian distribution is shown in yellow. The red line corresponds to a gaussian centered on the mode (Laplace approximation), while the green line corresponds to a gaussian with minimum reverse KL divergence</p>
 <p><strong>Requirement of the Laplace approximation</strong></p>
-<ol class="simple">
-<li><p>The MAP solution and the negative Hessian evaluated at the MAP solution</p></li>
-<li><p>For the above <span class="math notranslate nohighlight">\(g\)</span> should be continuous and differentiable on <span class="math notranslate nohighlight">\(\theta\)</span>, and the negative Hessian has to be positive definite</p></li>
-</ol>
+<p>For Laplace’s approximation the MAP solution and the negative Hessian evaluated at the MAP solution are needed</p>
+<p>In the first place <span class="math notranslate nohighlight">\(g(\theta)\)</span> has to be continuous and differentiable on <span class="math notranslate nohighlight">\(\theta\)</span>, and the negative Hessian has to be positive definite</p>
 <p><strong>A closer look to the evidence in Laplace approximation</strong></p>
 <p>Using Laplace approximation the log evidence can be decomposed as</p>
 <div class="math notranslate nohighlight">
@@ -420,31 +405,32 @@ p(\theta| \mathcal{D}) &amp;= \frac{p(\mathcal{D}|\theta) p(\theta) }{p(\mathcal
 &amp;=\log p(\mathcal{D}|\mathcal{M}_i, \hat \theta_{\text{map}}) + \log p(\hat \theta_{\text{map}}| \mathcal{M}_i) + \frac{K}{2} \log(2\pi) - \frac{1}{2} \log | \Lambda | \nonumber 
 \end{align}
 \end{split}\]</div>
-<p>The log evidence is approximated by the best likelihood fit plus the <strong>Occam’s factor</strong></p>
+<p><em>i.e.</em> the log evidence is approximated by the best likelihood fit plus the <strong>Occam’s factor</strong></p>
 <p>The Occam’s factor depends on the</p>
 <ul class="simple">
 <li><p>log pdf of <span class="math notranslate nohighlight">\(\theta\)</span>: Prior</p></li>
 <li><p>number of parameters <span class="math notranslate nohighlight">\(K\)</span>: Complexity</p></li>
 <li><p>second derivative around the MAP: Model uncertainty</p></li>
 </ul>
-<p><a class="reference external" href="https://people.eecs.berkeley.edu/~jordan/courses/260-spring10/lectures/lecture16.pdf">https://people.eecs.berkeley.edu/~jordan/courses/260-spring10/lectures/lecture16.pdf</a></p>
-<p>If we have a very broad prior, the approximation further reduces to</p>
+<p><strong>Relationship between the evidence in Laplace approximation and the BIC</strong></p>
+<p>In the regime of very large number of samples (<span class="math notranslate nohighlight">\(N\)</span>) it can be shown that Laplace’s approximations is dominated by</p>
 <div class="math notranslate nohighlight">
 \[
-\log p(\mathcal{D}|\mathcal{M}_i) \approx \log p(\mathcal{D}|\mathcal{M}_i, \hat \theta_{\text{mle}})  + \frac{K}{2} \log(2\pi) - \frac{1}{2} \log | \Lambda |, 
+\log p(\mathcal{D}|\mathcal{M}_i) \approx \log p(\mathcal{D}|\mathcal{M}_i, \hat \theta_{\text{mle}}) - \frac{K}{2} \log N, 
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\theta_{\text{mle}}\)</span> is the maximum likelihood solution</p>
-<p>We can further reduce the previous expression by considering the case of very large <span class="math notranslate nohighlight">\(N\)</span> and modeling the Hessian as <span class="math notranslate nohighlight">\(\Lambda \approx N \Lambda_0\)</span>. The terms that dominate will be</p>
-<div class="math notranslate nohighlight">
-\[
--\text{BIC} = \log p(\mathcal{D}|\mathcal{M}_i, \hat \theta_{\text{mle}}) - \frac{K}{2} \log N,
-\]</div>
-<p>which gives us the negative of the Bayesian Information Criterion (BIC).</p>
-<p>In other courses we minimized the BIC for model selection. Note all the assumptions hidden within BIC</p>
+<p>where <span class="math notranslate nohighlight">\(\theta_{\text{mle}}\)</span> is the maximum likelihood solution.</p>
+<p>The expression above is equivalent to the negative of the <a class="reference external" href="https://en.wikipedia.org/wiki/Bayesian_information_criterion">Bayesian Information Criterion (BIC)</a></p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p>Chapters 27 and 28 of <a class="reference external" href="http://www.inference.org.uk/itprnn/book.pdf">D. Mackay’s book</a></p></li>
+<li><p>Section 28.2 of <a class="reference external" href="http://web4.cs.ucl.ac.uk/staff/D.Barber/pmwiki/pmwiki.php?n=Brml.Online">D. Barber’s book</a></p></li>
+</ul>
+</div>
 </div>
 <div class="section" id="variational-inference">
 <h2>Variational Inference<a class="headerlink" href="#variational-inference" title="Permalink to this headline">¶</a></h2>
-<p>Now we will review a more general method for deterministic approximation. Remember that we want the (intractable) posterior</p>
+<p>In this section we review a more general method for deterministic approximation. Remember that we are interested in the (intractable) posterior</p>
 <div class="math notranslate nohighlight">
 \[
 p(\theta|\mathcal{D}) = \frac{p(\mathcal{D}|\theta) p(\theta)}{p(\mathcal{D})}
@@ -483,11 +469,10 @@ D_{\text{KL}}[q_\nu(\theta) || p(\theta|\mathcal{D})] = \log p(\mathcal{D}) + \i
 <p class="admonition-title">Note</p>
 <p>The ELBO can only be tight if <span class="math notranslate nohighlight">\(p\)</span> is within the family of <span class="math notranslate nohighlight">\(q\)</span></p>
 </div>
-<p>¿Why is it called variational?</p>
-<ul class="simple">
-<li><p>Functional: Function of functions. <a class="reference external" href="https://en.wikipedia.org/wiki/Calculus_of_variations">Calculus of variations</a>: Derivatives of functionals</p></li>
-<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Thermodynamic_free_energy">Variational Free Energy</a></p></li>
-</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Calculus_of_variations">Calculus of variations</a>: Derivatives of functionals (function of functions)</p>
+</div>
 <div class="section" id="more-attention-on-the-elbo">
 <h3>More attention on the ELBO<a class="headerlink" href="#more-attention-on-the-elbo" title="Permalink to this headline">¶</a></h3>
 <p>The ELBO can also be decomposed as</p>
@@ -545,20 +530,16 @@ q_\nu(\theta) = \prod_{i=1}^K q_{\nu}(\theta_i),
 \[
 q_i(\nu_i) \propto  \exp \left ( \mathbb{E}_{\prod q_{i\neq j}} \left[ p(\mathcal{D}, \theta) \right ] \right )
 \]</div>
-</div>
-</div>
-<div class="section" id="self-study">
-<h2>Self-study<a class="headerlink" href="#self-study" title="Permalink to this headline">¶</a></h2>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
 <ul class="simple">
-<li><p><a class="reference external" href="http://web4.cs.ucl.ac.uk/staff/D.Barber/pmwiki/pmwiki.php?n=Brml.Online">Chapter 28 of D. Barber’s book</a></p>
-<ul>
-<li><p>28.2 Laplace Approximation</p></li>
-<li><p>28.4 Variational Bounding</p></li>
-</ul>
-</li>
+<li><p>Chapters 33 of <a class="reference external" href="http://www.inference.org.uk/itprnn/book.pdf">D. Mackay’s book</a></p></li>
+<li><p>Section 28.4 of <a class="reference external" href="http://web4.cs.ucl.ac.uk/staff/D.Barber/pmwiki/pmwiki.php?n=Brml.Online">D. Barber’s book</a></p></li>
 <li><p>David Blei, <a class="reference external" href="https://arxiv.org/abs/1601.00670">“Variational Inference: A review for statisticians”</a>, <a class="reference external" href="https://www.youtube.com/watch?v=DaqNNLidswA">“Foundations and innovations”</a></p></li>
 <li><p>Tamara Broderick, <a class="reference external" href="http://www.tamarabroderick.com/tutorial_2018_icml.html">“Variational Bayes and beyond: Bayesian inference for big data”</a></p></li>
 </ul>
+</div>
+</div>
 </div>
 </div>
 
