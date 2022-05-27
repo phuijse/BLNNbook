@@ -6,10 +6,10 @@ chapters:
 - file: chapters/fundamentals/information_theory
 - file: chapters/fundamentals/generative_models
 - file: chapters/fundamentals/linear_regression
-- file: chapters/numpyro_basics
-- file: chapters/neural_networks_flax
-- file: chapters/approx_inference
-- file: chapters/svi
+- file: chapters/numpyro/numpyro_basics
+- file: chapters/neural_networks/flax
+- file: chapters/fundamentals/approx_inference
+- file: chapters/numpyro/svi
 #    - file: lectures/01_fundamentals/04_neural_networks
 #  - caption: Bayesian neural networks with `pyro`
 #    numbered: true
