@@ -10,6 +10,7 @@ chapters:
 - file: chapters/neural_networks/flax
 - file: chapters/fundamentals/approx_inference
 - file: chapters/numpyro/svi
+- file: chapters/fundamentals/pca
 #    - file: lectures/01_fundamentals/04_neural_networks
 #  - caption: Bayesian neural networks with `pyro`
 #    numbered: true
