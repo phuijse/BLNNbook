@@ -6,7 +6,7 @@ chapters:
 - file: chapters/fundamentals/information_theory
 - file: chapters/fundamentals/generative_models
 - file: chapters/fundamentals/linear_regression
-- file: chapters/numpyro/numpyro_basics
+- file: chapters/numpyro/basics
 - file: chapters/neural_networks/flax
 - file: chapters/fundamentals/approx_inference
 - file: chapters/numpyro/svi
