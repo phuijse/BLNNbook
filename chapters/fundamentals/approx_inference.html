@@ -1,0 +1,621 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Approximate Inference &#8212; Bayesian Learning and Neural Networks</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Stochastic Variational Inference with NumPyro" href="../numpyro/svi.html" />
+    <link rel="prev" title="My first Neural Network with flax" href="../neural_networks/flax.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Bayesian Learning and Neural Networks</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="probabilities.html">
+   Probability Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inference.html">
+   Statistical Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="information_theory.html">
+   Information Theoretic Quantities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="generative_models.html">
+   Matching probabilistic models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="linear_regression.html">
+   Bayesian Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../numpyro/basics.html">
+   NumPyro Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../neural_networks/flax.html">
+   My first Neural Network with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     flax
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Approximate Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../numpyro/svi.html">
+   Stochastic Variational Inference with NumPyro
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pca.html">
+   Linear Latent Variable Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../neural_networks/ae.html">
+   Non-linear LVMs: AutoEncoders
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../neural_networks/vae.html">
+   Variational Autoencoder
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/fundamentals/approx_inference.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phuijse/NNBL"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phuijse/NNBL/issues/new?title=Issue%20on%20page%20%2Fchapters/fundamentals/approx_inference.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phuijse/NNBL/master?urlpath=tree/chapters/fundamentals/approx_inference.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-laplace-approximation">
+   The Laplace Approximation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variational-inference">
+   Variational Inference
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#more-attention-on-the-elbo">
+     More attention on the ELBO
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-simple-posterior-fully-factorized-posterior">
+     A simple posterior: Fully-factorized posterior
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Approximate Inference</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-laplace-approximation">
+   The Laplace Approximation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variational-inference">
+   Variational Inference
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#more-attention-on-the-elbo">
+     More attention on the ELBO
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-simple-posterior-fully-factorized-posterior">
+     A simple posterior: Fully-factorized posterior
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="approximate-inference">
+<h1>Approximate Inference<a class="headerlink" href="#approximate-inference" title="Permalink to this headline">¶</a></h1>
+<p>For many interesting models (e.g. neural networks) the evidence</p>
+<div class="math notranslate nohighlight">
+\[
+p(\mathcal{D}|\mathcal{M}_i) = \int p(\mathcal{D}|\mathcal{M}_i, \theta) p(\theta| \mathcal{M}_i) d\theta
+\]</div>
+<p>is intractable, <em>i.e</em> either the integral has no closed-form or the dimensionality is so big that numerical integration is not feasible</p>
+<blockquote>
+<div><p>If the evidence is intractable then the posterior is also intractable</p>
+</div></blockquote>
+<p>In these cases we resort to approximations</p>
+<ul class="simple">
+<li><p><strong>Stochastic approximation:</strong> For example Markov Chain Monte Carlo (MCMC). MCMC is computationally demanding (for complex models) but produces asymptotically exact samples from the intractable distribution</p></li>
+<li><p><strong>Deterministic approximation:</strong> For example Variational Inference (VI). VI is more efficient than MCMC, but it is not asymptotically exact. Instead of samples we get a direct approximation of the intractable distribution</p></li>
+</ul>
+<p>The main topic of this lecture is deterministic approximations</p>
+<div class="section" id="the-laplace-approximation">
+<h2>The Laplace Approximation<a class="headerlink" href="#the-laplace-approximation" title="Permalink to this headline">¶</a></h2>
+<p>In Bayesian statistics, the Laplace approximation refers to the application of <a class="reference external" href="https://en.wikipedia.org/wiki/Pierre-Simon_Laplace">Laplace</a>’s method to approximate an intractable integral (evidence) using a Gaussian distribution</p>
+<p>In particular, Laplace’s method is a technique to solve integrals of the form</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = \int e^{g(\theta)} d\theta,
+\]</div>
+<p>by defining the auxiliary function as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+g(\theta) &amp;= \log  p(\mathcal{D}| \theta) p(\theta)  \\
+&amp;= \log  p(\mathcal{D}| \theta) + \log   p(\theta)  \\
+&amp;= \sum_{i=1}^N \log p(x_i |\theta) + \log   p(\theta) 
+\end{split}
+\end{split}\]</div>
+<p>then <span class="math notranslate nohighlight">\(f(x)\)</span> is equivalent to the evidence.</p>
+<p>The “approximation” consists of performing a second order Taylor expansion of <span class="math notranslate nohighlight">\(g(\theta)\)</span> around <span class="math notranslate nohighlight">\(\theta= \hat \theta_{\text{map}}\)</span>, i.e. the MAP solution. The result of this is</p>
+<div class="math notranslate nohighlight">
+\[
+g(\theta) \approx  g(\hat \theta_{\text{map}}) -  \frac{1}{2} (\theta - \hat \theta_{\text{map}})^T \Lambda (\theta - \hat \theta_{\text{map}})
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+\Lambda = -\frac{d^2 g}{d\theta^2} (\hat \theta_{\text{map}}),
+\]</div>
+<p>is the negative Hessian evaluated at <span class="math notranslate nohighlight">\(\hat \theta_{\text{map}}\)</span></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By definition the first derivative of <span class="math notranslate nohighlight">\(g(\theta)\)</span> evaluated at <span class="math notranslate nohighlight">\(\hat \theta_{\text{map}}\)</span> is zero</p>
+</div>
+<p>If we plug the Gaussian approximation back into the evidence we can now solve the integral as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+p(\mathcal{D}) &amp;\approx  e^{g(\hat \theta_{\text{map}})} \int e^{-\frac{1}{2} (\theta - \hat \theta_{\text{map}})^T \Lambda (\theta - \hat \theta_{\text{map}})} d\theta  \\
+&amp;= e^{g(\hat \theta_{\text{map}})} (2\pi)^{K/2} |\Lambda|^{-1/2}
+\end{split}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(K\)</span> is the dimensionality of <span class="math notranslate nohighlight">\(\theta\)</span>. With this the posterior is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+p(\theta| \mathcal{D}) &amp;= \frac{p(\mathcal{D}|\theta) p(\theta) }{p(\mathcal{D})}  = \frac{e^{ g(\theta)}}{\int e^{ g(\theta)} d\theta} = \\
+&amp;\approx \frac{1}{(2\pi)^{K/2} |\Lambda|^{-1/2}} e^{-  \frac{1}{2} (\theta - \hat \theta_{\text{map}})^T \Lambda (\theta - \hat \theta_{\text{map}})} 
+\end{split}
+\end{split}\]</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Laplace’s method approximates the posterior by a <strong>Multivariate Gaussian</strong> centered on the MAP.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>As the following figure shows, Laplace’s method might not be the “best” gaussian fit to our distribution</p>
+</div>
+<a class="reference internal image-reference" href="../../_images/laplace_vs_vi.png"><img alt="../../_images/laplace_vs_vi.png" src="../../_images/laplace_vs_vi.png" style="width: 400px;" /></a>
+<p>A non-gaussian distribution is shown in yellow. The red line corresponds to a gaussian centered on the mode (Laplace approximation), while the green line corresponds to a gaussian with minimum reverse KL divergence</p>
+<p><strong>Requirement of the Laplace approximation</strong></p>
+<p>For Laplace’s approximation the MAP solution and the negative Hessian evaluated at the MAP solution are needed</p>
+<p>In the first place <span class="math notranslate nohighlight">\(g(\theta)\)</span> has to be continuous and differentiable on <span class="math notranslate nohighlight">\(\theta\)</span>, and the negative Hessian has to be positive definite</p>
+<p><strong>A closer look to the evidence in Laplace approximation</strong></p>
+<p>Using Laplace approximation the log evidence can be decomposed as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\log p(\mathcal{D}|\mathcal{M}_i) &amp;\approx g(\hat \theta_{\text{map}}) + \frac{K}{2} \log(2\pi) - \frac{1}{2} \log | \Lambda | \nonumber \\
+&amp;=\log p(\mathcal{D}|\mathcal{M}_i, \hat \theta_{\text{map}}) + \log p(\hat \theta_{\text{map}}| \mathcal{M}_i) + \frac{K}{2} \log(2\pi) - \frac{1}{2} \log | \Lambda | \nonumber 
+\end{align}
+\end{split}\]</div>
+<p><em>i.e.</em> the log evidence is approximated by the best likelihood fit plus the <strong>Occam’s factor</strong></p>
+<p>The Occam’s factor depends on the</p>
+<ul class="simple">
+<li><p>log pdf of <span class="math notranslate nohighlight">\(\theta\)</span>: Prior</p></li>
+<li><p>number of parameters <span class="math notranslate nohighlight">\(K\)</span>: Complexity</p></li>
+<li><p>second derivative around the MAP: Model uncertainty</p></li>
+</ul>
+<p><strong>Relationship between the evidence in Laplace approximation and the BIC</strong></p>
+<p>In the regime of very large number of samples (<span class="math notranslate nohighlight">\(N\)</span>) it can be shown that Laplace’s approximations is dominated by</p>
+<div class="math notranslate nohighlight">
+\[
+\log p(\mathcal{D}|\mathcal{M}_i) \approx \log p(\mathcal{D}|\mathcal{M}_i, \hat \theta_{\text{mle}}) - \frac{K}{2} \log N, 
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\theta_{\text{mle}}\)</span> is the maximum likelihood solution.</p>
+<p>The expression above is equivalent to the negative of the <a class="reference external" href="https://en.wikipedia.org/wiki/Bayesian_information_criterion">Bayesian Information Criterion (BIC)</a></p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p>Chapters 27 and 28 of <a class="reference external" href="http://www.inference.org.uk/itprnn/book.pdf">D. Mackay’s book</a></p></li>
+<li><p>Section 28.2 of <a class="reference external" href="http://web4.cs.ucl.ac.uk/staff/D.Barber/pmwiki/pmwiki.php?n=Brml.Online">D. Barber’s book</a></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="variational-inference">
+<h2>Variational Inference<a class="headerlink" href="#variational-inference" title="Permalink to this headline">¶</a></h2>
+<p>In this section we review a more general method for deterministic approximation. Remember that we are interested in the (intractable) posterior</p>
+<div class="math notranslate nohighlight">
+\[
+p(\theta|\mathcal{D}) = \frac{p(\mathcal{D}|\theta) p(\theta)}{p(\mathcal{D})}
+\]</div>
+<p>Variational Inference (VI) is a family of methods in which a simpler (tractable) posterior distribution is proposed to “replace” <span class="math notranslate nohighlight">\(p(\theta|\mathcal{D})\)</span>. This simpler posterior is denoted as <span class="math notranslate nohighlight">\(q_\nu(\theta)\)</span> which represents a family of distributions parameterized by <span class="math notranslate nohighlight">\(\nu\)</span></p>
+<blockquote>
+<div><p><strong>Optimization problem:</strong> The objective is to find <span class="math notranslate nohighlight">\(\nu\)</span> that makes <span class="math notranslate nohighlight">\(q\)</span> most similar to <span class="math notranslate nohighlight">\(p\)</span></p>
+</div></blockquote>
+<a class="reference internal image-reference" href="../../_images/vi.png"><img alt="../../_images/vi.png" src="../../_images/vi.png" style="width: 350px;" /></a>
+<p>We can formalize this as a KL divergence minimization problem</p>
+<div class="math notranslate nohighlight">
+\[
+\hat \nu =  \text{arg}\min_\nu D_{\text{KL}}[q_\nu(\theta) || p(\theta|\mathcal{D})] = \int q_\nu(\theta) \log \frac{q_\nu(\theta)}{p(\theta|\mathcal{D})} d\theta,
+\]</div>
+<p>but this expression depends on the intractable posterior. To continue we use Bayes Theorem to move the evidence out from the integral</p>
+<div class="math notranslate nohighlight">
+\[
+D_{\text{KL}}[q_\nu(\theta) || p(\theta|\mathcal{D})] = \log p(\mathcal{D}) + \int q_\nu(\theta) \log \frac{q_\nu(\theta)}{p(\mathcal{D}, \theta)} d\theta
+\]</div>
+<p>As <span class="math notranslate nohighlight">\(p(\mathcal{D})\)</span> does not depend on <span class="math notranslate nohighlight">\(\nu\)</span> we can focus on the right hand term. The optimization problem is typically written as</p>
+<div class="math notranslate nohighlight">
+\[
+\hat \nu =  \text{arg}\max_\nu \mathcal{L}(\nu) =\int q_\nu(\theta) \log \frac{p(\mathcal{D}, \theta)}{q_\nu(\theta)}d\theta
+\]</div>
+<p>where <span class="math notranslate nohighlight">\( \mathcal{L}(\nu)\)</span> is called the <strong>Evidence Lower BOund</strong> (ELBO).</p>
+<p>The name comes from the fact that</p>
+<div class="math notranslate nohighlight">
+\[
+\log p(\mathcal{D}) \geq  \mathcal{L}(\nu) = \int q_\nu(\theta) \log \frac{p(\mathcal{D}, \theta)}{q_\nu(\theta)}d\theta,
+\]</div>
+<p>which is a result of the non-negativity of the KL divergence.</p>
+<blockquote>
+<div><p>Ideally we choose a “simple-enough” parametric family <span class="math notranslate nohighlight">\(q\)</span> so that the ELBO is tractable</p>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The ELBO can only be tight if <span class="math notranslate nohighlight">\(p\)</span> is within the family of <span class="math notranslate nohighlight">\(q\)</span></p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Calculus_of_variations">Calculus of variations</a>: Derivatives of functionals (function of functions)</p>
+</div>
+<div class="section" id="more-attention-on-the-elbo">
+<h3>More attention on the ELBO<a class="headerlink" href="#more-attention-on-the-elbo" title="Permalink to this headline">¶</a></h3>
+<p>The ELBO can also be decomposed as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\mathcal{L}(\nu) &amp;= \int q_\nu(\theta) \log \frac{p(\mathcal{D}|\theta) p (\theta)}{q_\nu(\theta)}d\theta \nonumber \\
+&amp;= \int q_\nu(\theta) \log p(\mathcal{D}|\theta) d\theta - \int q_\nu(\theta) \log \frac{q_\nu(\theta)}{ p (\theta)} d\theta  \nonumber \\
+&amp;= \mathbb{E}_{\theta \sim q_\nu(\theta)} \left[\log p(\mathcal{D}|\theta)\right] - D_{KL}[q_\nu(\theta) || p(\theta)]  \nonumber 
+\end{align}
+\end{split}\]</div>
+<p>From which we can recognize that maximizing the ELBO is equivalent to:</p>
+<ul class="simple">
+<li><p>Maximizing the log likelihood for parameters sampled from the approximate posterior: Generative model produces realistic data samples</p></li>
+<li><p>Minimizing the KL divergence between the approximate posterior and prior: Regularization for the approximate posterior</p></li>
+</ul>
+<p><strong>Another way to “obtain” the ELBO</strong></p>
+<p>We can get the ELBO using <a class="reference external" href="https://en.wikipedia.org/wiki/Jensen%27s_inequality">Jensen’s inequality</a> on the log evidence</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\log p(\mathcal{D}) &amp;=  \log \mathbb{E}_{\theta\sim p(\theta)} \left[p(\mathcal{D}|\theta)\right]\nonumber \\
+&amp;=  \log \mathbb{E}_{\theta\sim q_\nu(\theta)} \left[p(\mathcal{D}|\theta)\frac{p(\theta)}{q_\nu(\theta)}\right]\nonumber \\
+&amp;\geq  \mathbb{E}_{\theta\sim q_\nu(\theta)} \left[\log \frac{p(\mathcal{D},\theta)}{q_\nu(\theta)}\right] =\int q_\nu(\theta) \log \frac{p(\mathcal{D},\theta)}{q_\nu(\theta)}d\theta \nonumber 
+\end{align}
+\end{split}\]</div>
+</div>
+<div class="section" id="a-simple-posterior-fully-factorized-posterior">
+<h3>A simple posterior: Fully-factorized posterior<a class="headerlink" href="#a-simple-posterior-fully-factorized-posterior" title="Permalink to this headline">¶</a></h3>
+<p>A broadly-used idea to make posteriors tractable is to assume that there is no correlation between factors</p>
+<div class="math notranslate nohighlight">
+\[
+q_\nu(\theta) = \prod_{i=1}^K q_{\nu}(\theta_i), 
+\]</div>
+<p>this is known as the <strong>Mean-field</strong> VI</p>
+<p>Replacing this factorized posterior on the ELBO</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\mathcal{L}_\text{MF}(\nu) &amp;= \int  \prod_{i=1}^K q_{\nu}(\theta_i) \left ( \log p(\mathcal{D}, \theta) - \sum_{i=1}^K \log q_{\nu}(\theta_i) \right) d\theta  \nonumber \\
+&amp;= \int q_{\nu_i}(\theta_i) \left [ \int \prod_{j\neq i} q_{\nu_j}(\theta_j) \log p(\mathcal{D}, \theta) d\theta_j \right ] d\theta_i - \sum_{i=1}^K \int q_{\nu_i}(\theta_i) \log q_{\nu_i}(\theta_i)  d\theta_i \nonumber \\
+\end{align}
+\end{split}\]</div>
+<p>Asumming that we keep all <span class="math notranslate nohighlight">\(\theta\)</span> except <span class="math notranslate nohighlight">\(\theta_i\)</span> fixed, we can update <span class="math notranslate nohighlight">\(\theta_i\)</span> iteratively using</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}_\text{MF}(\nu_i) =  \int q_{\nu_i}(\theta_i) \mathbb{E}_{\prod q_{i\neq j}} \left[ \log p(\mathcal{D},\theta) \right ] d\theta_i - \int q_{\nu_i}(\theta_i) \log q_{\nu_i}(\theta_i)  d\theta_i + \text{Constant}  
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>(In this case) Maximizing the ELBO is equivalent to minimizing the KL between <span class="math notranslate nohighlight">\(q_{\nu_i}(\theta_i)\)</span> and <span class="math notranslate nohighlight">\(\mathbb{E}_{\prod q_{i\neq j}} \left[ p(\mathcal{D}, \theta) \right ]\)</span></p>
+</div>
+<p>The optimal <span class="math notranslate nohighlight">\(q\)</span> in this case is given by</p>
+<div class="math notranslate nohighlight">
+\[
+q_i(\nu_i) \propto  \exp \left ( \mathbb{E}_{\prod q_{i\neq j}} \left[ p(\mathcal{D}, \theta) \right ] \right )
+\]</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p>Chapters 33 of <a class="reference external" href="http://www.inference.org.uk/itprnn/book.pdf">D. Mackay’s book</a></p></li>
+<li><p>Section 28.4 of <a class="reference external" href="http://web4.cs.ucl.ac.uk/staff/D.Barber/pmwiki/pmwiki.php?n=Brml.Online">D. Barber’s book</a></p></li>
+<li><p>David Blei, <a class="reference external" href="https://arxiv.org/abs/1601.00670">“Variational Inference: A review for statisticians”</a>, <a class="reference external" href="https://www.youtube.com/watch?v=DaqNNLidswA">“Foundations and innovations”</a></p></li>
+<li><p>Tamara Broderick, <a class="reference external" href="http://www.tamarabroderick.com/tutorial_2018_icml.html">“Variational Bayes and beyond: Bayesian inference for big data”</a></p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters/fundamentals"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="../neural_networks/flax.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">My first Neural Network with <code class="docutils literal notranslate"><span class="pre">flax</span></code></p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../numpyro/svi.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Stochastic Variational Inference with NumPyro</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Pablo Huijse Heise<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
