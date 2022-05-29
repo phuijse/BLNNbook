@@ -25,7 +25,7 @@ import urllib.request
 import numpy as np
 
 
-_DATA = "data/"
+_DATA = "../data/"
 
 
 def _download(url, filename):
