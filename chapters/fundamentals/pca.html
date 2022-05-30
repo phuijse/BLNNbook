@@ -374,9 +374,9 @@ p(\textbf{x}) &amp;= \int_z p(\textbf{x}, \textbf{z}) \,d\textbf{z} \nonumber \\
 <p>This comes from the following objective</p>
 <div class="math notranslate nohighlight">
 \[
-\min_W W^T C W, \text{s.t.} ~ W^T W = I,
+\max_W W^T C W, \text{s.t.} ~ W^T W = I,
 \]</div>
-<p><em>i.e.</em> PCA finds an <strong>orthogonal transformation</strong> <span class="math notranslate nohighlight">\(W\)</span> that <strong>minimizes the variance</strong> of the projected data <span class="math notranslate nohighlight">\(XW\)</span></p>
+<p><em>i.e.</em> PCA finds an <strong>orthogonal transformation</strong> <span class="math notranslate nohighlight">\(W\)</span> that <strong>maximizes the variance</strong> of the projected data <span class="math notranslate nohighlight">\(XW\)</span></p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>By reducing the amount of columns of <span class="math notranslate nohighlight">\(W\)</span> we reduce the dimensionality of <span class="math notranslate nohighlight">\(XW\)</span></p>
