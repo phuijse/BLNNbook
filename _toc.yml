@@ -13,6 +13,7 @@ chapters:
 - file: chapters/fundamentals/pca
 - file: chapters/neural_networks/ae
 - file: chapters/neural_networks/vae
+- file: chapters/neural_networks/bayesian
   #    - file: lectures/01_fundamentals/04_neural_networks
 #  - caption: Bayesian neural networks with `pyro`
 #    numbered: true
