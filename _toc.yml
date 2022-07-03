@@ -14,6 +14,10 @@ chapters:
 - file: chapters/neural_networks/ae
 - file: chapters/neural_networks/vae
 - file: chapters/neural_networks/bayesian
+- file: chapters/gaussian_processes/gp1
+- file: chapters/gaussian_processes/gp2
+
+
   #    - file: lectures/01_fundamentals/04_neural_networks
 #  - caption: Bayesian neural networks with `pyro`
 #    numbered: true
