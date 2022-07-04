@@ -186,4 +186,7 @@ For a more in depth treatment see this [list of papers related to SVGD](https://
 
 :::
 
+### Operator VI
+
+[Ranganath et al. 2016](https://arxiv.org/abs/1610.09033) proposed to replace the KL divergence as objective for VI with the Langevin-stein operator 
 
