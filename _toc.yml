@@ -1,39 +1,30 @@
 format: jb-book
 root: README
-chapters:
-- file: chapters/fundamentals/probabilities
-- file: chapters/fundamentals/inference
-- file: chapters/fundamentals/information_theory
-- file: chapters/fundamentals/generative_models
-- file: chapters/fundamentals/linear_regression
-- file: chapters/numpyro/basics
-- file: chapters/neural_networks/flax
-- file: chapters/fundamentals/approx_inference
-- file: chapters/numpyro/svi
-- file: chapters/fundamentals/pca
-- file: chapters/neural_networks/ae
-- file: chapters/neural_networks/vae
-- file: chapters/neural_networks/bayesian
-- file: chapters/neural_networks/bayesian2
-- file: chapters/gaussian_processes/gp1
-#- file: chapters/gaussian_processes/gp2
+parts:
+  - caption: Theoretical background 
+    chapters:
+      - file: chapters/fundamentals/probabilities
+      - file: chapters/fundamentals/inference
+      - file: chapters/fundamentals/information_theory
+      - file: chapters/fundamentals/generative_models
+      - file: chapters/numpyro/basics
+  - caption: Conjugate bayesian models 
+    chapters:
+    - file: chapters/bayesian/linear_regression
+    - file: chapters/bayesian/pca
+    - file: chapters/bayesian/gp1
+    - file: chapters/bayesian/gp2
+  - caption: Approximate inference
+    chapters:
+    - file: chapters/variational/approx_inference
+    - file: chapters/variational/svi
+    - file: chapters/variational/vi_advances
+    - file: chapters/variational/nf
+  - caption: Neural networks
+    chapters:
+    - file: chapters/neural_networks/flax
+    - file: chapters/neural_networks/ae
+    - file: chapters/neural_networks/vae
+    - file: chapters/neural_networks/bayesian
+    - file: chapters/neural_networks/bayesian2
 
-
-  #    - file: lectures/01_fundamentals/04_neural_networks
-#  - caption: Bayesian neural networks with `pyro`
-#    numbered: true
-#    chapters:
-#     - file: lectures/02_bayesian_neural_networks/01_pyro_basics
-#     - file: lectures/02_bayesian_neural_networks/02_gaussian_processes
-#     - file: lectures/02_bayesian_neural_networks/03_approximate_inference
-#     - file: lectures/02_bayesian_neural_networks/04_pyro_svi
-#     - file: lectures/02_bayesian_neural_networks/05_variational_autoencoder
-#     - file: lectures/02_bayesian_neural_networks/06_fully_bayesian_nn
-#  - caption: Recent advances
-#    numbered: true
-#    chapters:
-#     - file: lectures/03_advanced_topics/01_advances_in_VI-Copy1
-#     - file: lectures/03_advanced_topics/02_more_on_BNN
-#     - file: lectures/03_advanced_topics/03_normalizing_flows
-#     - file: lectures/03_advanced_topics/04_further_study
-   
