@@ -2,14 +2,14 @@
 title: Bayesian Learning and Neural Networks
 author: Pablo Huijse Heise
 copyright: "2022"
-#logo: logo.png
+logo: logo.png
 only_build_toc_files: true
 
 execute:
   execute_notebooks: off
 
 repository:
-  url: https://github.com/phuijse/NNBL
+  url: https://github.com/phuijse/BLNNbook
 
 html:
   home_page_in_navbar: false
