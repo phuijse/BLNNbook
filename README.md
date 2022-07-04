@@ -1,6 +1,8 @@
 # Bayesian Learning and Neural Networks
 
-An ebook on Neural Networks and Bayesian Learning made for the students of the INFO320 course at the [Master on INformatics (MIN) program, UACh](http://magister.inf.uach.cl/). This book is published at http://phuijse.github.io/NNBL and it sources can be found at http://github.com/phuijse/NNBL. This book is constantly evolving. Feel free to contact me via phuijse at inf dot uach dot cl or by writing issues in this repo
+A book on Bayesian Learning and Neural Networks covering theoretical foundations and implementations using Python libraries. This book is published at http://phuijse.github.io/BLNNbook and it sources can be found at http://github.com/phuijse/BLNNbook. This book is constantly evolving, feel free to contact me via phuijse at inf dot uach dot cl or by writing issues in this repo
+
+This book was originally made for the students of the INFO320 course at the [Master on INformatics (MIN) program, UACh](http://magister.inf.uach.cl/).
 
 **Course abstract**
 
@@ -19,7 +21,8 @@ For more a technical view I suggest reading/watching:
 - Jospin, L. V., Buntine, W., Boussaid, F., Laga, H., & Bennamoun, M. (2020). [Hands-on Bayesian Neural Networks--a Tutorial for Deep Learning Users](https://arxiv.org/abs/2007.06823). arXiv preprint arXiv:2007.06823.
 - [Deep Bayes Moscow 2019](https://www.youtube.com/watch?v=SPgRVzfnESQ&list=PLe5rNUydzV9QHe8VDStpU0o8Yp63OecdW&index=2)
 
-And if need a more general view on Machine Learning I suggest:
+For a more general view on Machine Learning I suggest:
+
 - Murphy, K. P. (2012). Machine learning: a probabilistic perspective. MIT press.
 - Theodoridis, S. (2015). Machine learning: a Bayesian and optimization perspective. Academic press.
 
