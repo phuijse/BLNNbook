@@ -62,8 +62,6 @@ With this we can go from a simple Gaussian to more expressive/complex/multi-moda
 
 Nowadays several types of flows exist in the literature, *e.g.* planar, radial, autoregresive. As example, see this work in which [normalizing flows were used to make the approximate posterior in VAE more expressive](https://arxiv.org/abs/1809.05861)
 
-We will delve into this topic in another lecture. 
-
 Key references:
 
 - Dinh, Krueger and Bengio, ["NICE: Non-linear Independent Components Estimation"](https://arxiv.org/abs/1410.8516)
@@ -101,7 +99,6 @@ where $w_k = \frac{p_\theta(x, z_k)}{q_\phi(z_k|x)}$ are called the importance w
 
 This tighter bound [has been shown to be equivalent to using the regular bound with a more complex posterior](https://arxiv.org/pdf/1808.09034.pdf). Recent discussion can be find in [Debiasing Evidence Approximations: On Importance-weighted Autoencoders and Jackknife Variational Inference](https://openreview.net/forum?id=HyZoi-WRb) and [Tighter Variational Bounds are Not Necessarily Better](https://arxiv.org/abs/1802.04537). 
 
-Apparently importance weighting is [implemented in `pyro`](http://docs.pyro.ai/en/stable/inference_algos.html#module-pyro.infer.importance)
 
 
 
