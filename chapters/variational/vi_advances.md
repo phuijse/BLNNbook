@@ -108,21 +108,20 @@ This tighter bound [has been shown to be equivalent to using the regular bound w
 
 ### $\alpha$ divergence 
 
-The KL divergence is computationally-convenient but there are other options to measure how far two distributions are. For example the family of $\alpha$ divergences (Renyi's formulation)
+The KL divergence is computationally-convenient but there are other options to measure how far two distributions are. For example the family of $\alpha$ divergences (Renyi's formulation) is defined as 
 
 $$
 D_\alpha(p||q) = \frac{1}{\alpha -1} \log p(x)^\alpha q(x)^{1-\alpha} \,dx
 $$
 
-which is a generalization of the KL divergence: for $\alpha \to 1$ the KL is recovered
+where $\alpha$ represents a trade-of between the mass-covering and zero-forcing effects. The KL corresponds to the special case $\alpha \to 1$
+
 
 :::{note}
 
-$\alpha$ represents a trade-of between the mass-covering and zero-forcing effects
+The $\alpha$ divergence has been explored for [VI recently](https://arxiv.org/pdf/1511.03243.pdf) and is [implemented in `numpyro`](https://num.pyro.ai/en/latest/svi.html#numpyro.infer.elbo.RenyiELBO)
 
 :::
-
-The $\alpha$ divergence has been explored for [VI recently](https://arxiv.org/pdf/1511.03243.pdf) and is [implemented in `numpyro`](https://num.pyro.ai/en/latest/svi.html#numpyro.infer.elbo.RenyiELBO)
 
 ### f divergence
 
