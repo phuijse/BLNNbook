@@ -13,7 +13,7 @@ parts:
     - file: chapters/bayesian/linear_regression
     - file: chapters/bayesian/pca
     - file: chapters/bayesian/gp1
-    - file: chapters/bayesian/gp2
+      #    - file: chapters/bayesian/gp2
   - caption: Approximate inference
     chapters:
     - file: chapters/variational/approx_inference
