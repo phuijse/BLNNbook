@@ -56,7 +56,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Bayesian Linear Regression" href="linear_regression.html" />
+    <link rel="next" title="NumPyro Basics" href="../numpyro/basics.html" />
     <link rel="prev" title="Information Theoretic Quantities" href="information_theory.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
@@ -89,7 +89,12 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="current nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Theoretical background
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="probabilities.html">
    Probability Theory
@@ -111,15 +116,66 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="linear_regression.html">
-   Bayesian Linear Regression
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="../numpyro/basics.html">
    NumPyro Basics
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Conjugate bayesian models
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bayesian/linear_regression.html">
+   Bayesian Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bayesian/pca.html">
+   Linear Latent Variable Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bayesian/gp1.html">
+   An theoretical introduction to Gaussian processes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Approximate inference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../variational/approx_inference.html">
+   Approximate Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../variational/svi.html">
+   Stochastic Variational Inference with NumPyro
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../variational/vi_advances.html">
+   Recent advances on VI
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../variational/nf.html">
+   An introduction to Normalizing Flow models
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Neural networks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../neural_networks/flax.html">
    My first Neural Network with
@@ -128,21 +184,6 @@ const thebe_selector_output = ".output, .cell_output"
      flax
     </span>
    </code>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="approx_inference.html">
-   Approximate Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../numpyro/svi.html">
-   Stochastic Variational Inference with NumPyro
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="pca.html">
-   Linear Latent Variable Models
   </a>
  </li>
  <li class="toctree-l1">
@@ -166,8 +207,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../gaussian_processes/gp1.html">
-   An theoretical introduction to Gaussian processes
+  <a class="reference internal" href="../neural_networks/bayesian2.html">
+   More on Bayesian Neural Networks
   </a>
  </li>
 </ul>
@@ -2991,10 +3032,10 @@ D_{\text{KL}}\left [ p_\theta(x) || p^*(x) \right] &amp;= \int p_\theta(x) \log 
             <p class="prev-next-title">Information Theoretic Quantities</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="linear_regression.html" title="next page">
+    <a class='right-next' id="next-link" href="../numpyro/basics.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Bayesian Linear Regression</p>
+        <p class="prev-next-title">NumPyro Basics</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

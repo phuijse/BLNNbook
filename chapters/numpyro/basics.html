@@ -56,8 +56,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="My first Neural Network with flax" href="../neural_networks/flax.html" />
-    <link rel="prev" title="Bayesian Linear Regression" href="../fundamentals/linear_regression.html" />
+    <link rel="next" title="Bayesian Linear Regression" href="../bayesian/linear_regression.html" />
+    <link rel="prev" title="Matching probabilistic models" href="../fundamentals/generative_models.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -89,7 +89,12 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="current nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Theoretical background
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../fundamentals/probabilities.html">
    Probability Theory
@@ -110,16 +115,67 @@ const thebe_selector_output = ".output, .cell_output"
    Matching probabilistic models
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/linear_regression.html">
-   Bayesian Linear Regression
-  </a>
- </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    NumPyro Basics
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Conjugate bayesian models
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bayesian/linear_regression.html">
+   Bayesian Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bayesian/pca.html">
+   Linear Latent Variable Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bayesian/gp1.html">
+   An theoretical introduction to Gaussian processes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Approximate inference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../variational/approx_inference.html">
+   Approximate Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../variational/svi.html">
+   Stochastic Variational Inference with NumPyro
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../variational/vi_advances.html">
+   Recent advances on VI
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../variational/nf.html">
+   An introduction to Normalizing Flow models
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Neural networks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../neural_networks/flax.html">
    My first Neural Network with
@@ -128,21 +184,6 @@ const thebe_selector_output = ".output, .cell_output"
      flax
     </span>
    </code>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/approx_inference.html">
-   Approximate Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="svi.html">
-   Stochastic Variational Inference with NumPyro
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/pca.html">
-   Linear Latent Variable Models
   </a>
  </li>
  <li class="toctree-l1">
@@ -166,8 +207,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../gaussian_processes/gp1.html">
-   An theoretical introduction to Gaussian processes
+  <a class="reference internal" href="../neural_networks/bayesian2.html">
+   More on Bayesian Neural Networks
   </a>
  </li>
 </ul>
@@ -2872,17 +2913,17 @@ Number of divergences: 0
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="../fundamentals/linear_regression.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../fundamentals/generative_models.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Bayesian Linear Regression</p>
+            <p class="prev-next-title">Matching probabilistic models</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../neural_networks/flax.html" title="next page">
+    <a class='right-next' id="next-link" href="../bayesian/linear_regression.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">My first Neural Network with <code class="docutils literal notranslate"><span class="pre">flax</span></code></p>
+        <p class="prev-next-title">Bayesian Linear Regression</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

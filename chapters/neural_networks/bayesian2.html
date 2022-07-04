@@ -1,0 +1,598 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>More on Bayesian Neural Networks &#8212; Bayesian Learning and Neural Networks</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Bayesian Neural Networks with numpyro" href="bayesian.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Bayesian Learning and Neural Networks</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Theoretical background
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/probabilities.html">
+   Probability Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/inference.html">
+   Statistical Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/information_theory.html">
+   Information Theoretic Quantities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/generative_models.html">
+   Matching probabilistic models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../numpyro/basics.html">
+   NumPyro Basics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Conjugate bayesian models
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bayesian/linear_regression.html">
+   Bayesian Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bayesian/pca.html">
+   Linear Latent Variable Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bayesian/gp1.html">
+   An theoretical introduction to Gaussian processes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Approximate inference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../variational/approx_inference.html">
+   Approximate Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../variational/svi.html">
+   Stochastic Variational Inference with NumPyro
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../variational/vi_advances.html">
+   Recent advances on VI
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../variational/nf.html">
+   An introduction to Normalizing Flow models
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Neural networks
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="flax.html">
+   My first Neural Network with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     flax
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ae.html">
+   Non-linear LVMs: AutoEncoders
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="vae.html">
+   Variational Autoencoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bayesian.html">
+   Bayesian Neural Networks with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     numpyro
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   More on Bayesian Neural Networks
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/neural_networks/bayesian2.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phuijse/NNBL"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phuijse/NNBL/issues/new?title=Issue%20on%20page%20%2Fchapters/neural_networks/bayesian2.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phuijse/NNBL/master?urlpath=tree/chapters/neural_networks/bayesian2.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayes-by-backprop">
+   Bayes by backprop
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-local-reparametrization-trick">
+   The local reparametrization trick
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#flipout">
+   FLIPOUT
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#natural-gradient-vi">
+   Natural gradient VI
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#approximate-mcmc">
+   Approximate MCMC
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dropout-as-a-bayesian-approximation">
+   Dropout as a Bayesian approximation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#deep-ensembles">
+   Deep ensembles
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-are-bayesian-neural-networks-posteriors-really-like">
+   What are Bayesian Neural Networks Posteriors Really Like
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#assorted-list-of-interesting-discussions">
+   Assorted list of interesting discussions
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>More on Bayesian Neural Networks</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayes-by-backprop">
+   Bayes by backprop
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-local-reparametrization-trick">
+   The local reparametrization trick
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#flipout">
+   FLIPOUT
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#natural-gradient-vi">
+   Natural gradient VI
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#approximate-mcmc">
+   Approximate MCMC
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dropout-as-a-bayesian-approximation">
+   Dropout as a Bayesian approximation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#deep-ensembles">
+   Deep ensembles
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-are-bayesian-neural-networks-posteriors-really-like">
+   What are Bayesian Neural Networks Posteriors Really Like
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#assorted-list-of-interesting-discussions">
+   Assorted list of interesting discussions
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="more-on-bayesian-neural-networks">
+<h1>More on Bayesian Neural Networks<a class="headerlink" href="#more-on-bayesian-neural-networks" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="bayes-by-backprop">
+<h2>Bayes by backprop<a class="headerlink" href="#bayes-by-backprop" title="Permalink to this headline">¶</a></h2>
+<p>In 2015 <a class="reference external" href="https://arxiv.org/pdf/1505.05424.pdf">Blundel et al</a> proposed <strong>Bayes by Backprop</strong> which consists on replacing the ELBO</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}(\nu) = \mathbb{E}_{\theta \sim q_\nu(\theta)} \left[\log p(\mathcal{D}|\theta)\right] - D_{KL}[q_\nu(\theta) || p(\theta)]
+\]</div>
+<p>with monte-carlo estimates</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}(\nu) \approx  \sum_{i=1}^N \sum_{k=1}^K \log p(x_i|\theta_k) - \log q_\nu(\theta_k)  + \log p(\theta_k)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(N\)</span> is the number of data samples in the minibatch and <span class="math notranslate nohighlight">\(K\)</span> is the number of times we sample from the parameters <span class="math notranslate nohighlight">\(\theta\)</span>. This formulation is more general, because it does not depend on closed-form solutions of the KL</p>
+<p>Thanks to this flexibility more complex priors can be used. In the original Bayes-by-backprop paper the following is considered</p>
+<div class="math notranslate nohighlight">
+\[
+p(\theta) = \pi_1 \mathcal{N}(0, \sigma_1^2) + \pi_2 \mathcal{N}(0, \sigma_2^2)
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\sigma_1 \ll \sigma_2\)</span>. The term with smaller variance allows for automatic “shut-down” (pruning) of weights, <em>i.e.</em> sparsification</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://github.com/piEsposito/blitz-bayesian-deep-learning">BLiTZ</a> is a PyTorch-based library that implements Bayes by Backprop to train BNNs</p>
+</div>
+</div>
+<div class="section" id="the-local-reparametrization-trick">
+<h2>The local reparametrization trick<a class="headerlink" href="#the-local-reparametrization-trick" title="Permalink to this headline">¶</a></h2>
+<p>In BNN we sample from every weight as</p>
+<div class="math notranslate nohighlight">
+\[
+w_{ji}\sim \mathcal{N}(\mu_{ji}, \sigma_{ji}^2)
+\]</div>
+<p>using the reparameterization trick to reduce variance</p>
+<div class="math notranslate nohighlight">
+\[
+w_{ji} = \mu_{ji} +\epsilon_{ji} \cdot\sigma_{ji}, \quad \epsilon_{ji} \sim \mathcal{N}(0, I)
+\]</div>
+<p>The idea behind the [local reparameterization (Kingma, Sallimans and Welling, 2015)](](<a class="reference external" href="http://papers.nips.cc/paper/5666-variational-dropout-and-the-local-reparameterization-trick">http://papers.nips.cc/paper/5666-variational-dropout-and-the-local-reparameterization-trick</a>) is that instead of sampling from every weight we sample from the pre-activations</p>
+<div class="math notranslate nohighlight">
+\[
+Z = WX + B
+\]</div>
+<p>then</p>
+<div class="math notranslate nohighlight">
+\[
+z_i = \nu_i + \eta_i  \cdot \epsilon_{i}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> is still a standard normal and <span class="math notranslate nohighlight">\(\nu_i = \sum_j x_j \mu_{ji}\)</span> and <span class="math notranslate nohighlight">\(\eta_i = \sqrt{\sum_j x_j^2 \sigma_{ji}^2}\)</span></p>
+<p>This reduces the amounts of samples we take by orders of magnitude and further reduces the variance of the estimator</p>
+</div>
+<div class="section" id="flipout">
+<h2><a class="reference external" href="https://arxiv.org/abs/1803.04386">FLIPOUT</a><a class="headerlink" href="#flipout" title="Permalink to this headline">¶</a></h2>
+<p>Decorrelation of the gradients within a minibatch speeding up bayesian neural networks with gaussian perturbations</p>
+</div>
+<div class="section" id="natural-gradient-vi">
+<h2><a class="reference external" href="https://papers.nips.cc/paper/8681-practical-deep-learning-with-bayesian-principles.pdf">Natural gradient VI</a><a class="headerlink" href="#natural-gradient-vi" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="approximate-mcmc">
+<h2><a class="reference external" href="https://arxiv.org/abs/1908.03491">Approximate MCMC</a><a class="headerlink" href="#approximate-mcmc" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="dropout-as-a-bayesian-approximation">
+<h2>Dropout as a Bayesian approximation<a class="headerlink" href="#dropout-as-a-bayesian-approximation" title="Permalink to this headline">¶</a></h2>
+<p>This is an alternative take on BNNs based on <a class="reference external" href="https://arxiv.org/abs/1506.02142">representing uncertainty based on dropout technique (Gal and Gharahmani, 2015)</a></p>
+<p>Dropout turns-off neurons following a certain distribution. The authors argue that this is like having an ensemble of neural networks and hence uncertainties can be computed. This is done by applying dropout not only during training but also when predicting (test set) to estimate uncertainty</p>
+<p><a class="reference external" href="http://bayesiandeeplearning.org/2016/papers/BDL_4.pdf">This short letter</a> critiques this application of dropout, and shows that uncertainty with this approach (fixed dropout probability) does not decrease as new data points arrive. <a class="reference external" href="https://papers.nips.cc/paper/6949-concrete-dropout">A solution to this?</a></p>
+</div>
+<div class="section" id="deep-ensembles">
+<h2>Deep ensembles<a class="headerlink" href="#deep-ensembles" title="Permalink to this headline">¶</a></h2>
+<p>Another alternative take on BNN based on <a class="reference external" href="https://arxiv.org/abs/1612.01474">ensembles of deterministic neural networks trained using MAP (Laksminarayanan, Pritzel and Blundell, 2016)</a>.</p>
+<p>Predicting with an ensemble of deterministic neural networks would return a sample of predictions, which can then be used as a sort of posterior distribution. The key is how to introduce randomness so that there is diversity in the ensemble</p>
+<p>One way to do this is by using bagging (bootstrap resampling), i.e. training the deterministic NNs with subsamples of the training data (drawn with replacement). But this has been shown to be worse than using the full dataset for all the individual classifiers <a class="reference external" href="https://openreview.net/forum?id=dTCir0ceyv0">(Nixon, Laksminarayanan and Tran,  2020)</a></p>
+<p>In the original paper the randomization comes only from</p>
+<ul class="simple">
+<li><p>The initial values of parameters of the neural networks (default pytorch initialization)</p></li>
+<li><p>The shuffling of training data points</p></li>
+</ul>
+<p>One key aspect of this work is that to smooth the predictive distributions, adversarial examples are used. They also highlight the use of the variance of the predictions in the case of regression. The full algorithm goes as follows</p>
+<a class="reference internal image-reference" href="../../_images/deep-ensembles.png"><img alt="../../_images/deep-ensembles.png" src="../../_images/deep-ensembles.png" style="width: 500px;" /></a>
+<p>The paper compares ensembles with MC-dropout (which can also be interpreted as an ensemble method), showing that it is much better at detecting out-of-distribution samples. <a class="reference external" href="https://arxiv.org/pdf/1906.01620.pdf">(Gustafsson et al 2020)</a> obtains a similar result when comparing ensembles and MC-dropout for computer vision architectures. A more through comparison (including SVI and other alternatives) is given in <a class="reference external" href="https://arxiv.org/pdf/1906.02530.pdf">Ovadia et al. 2019</a></p>
+<ul class="simple">
+<li><p>More theoretical insight on the difference between ensemble and variational solutions is given in <a class="reference external" href="https://arxiv.org/pdf/1912.02757.pdf">(Fort 2020)</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/2005.07186">(Dusenberry et al 2020)</a> proposes an interesting alternative of combining BNN and ensembles</p></li>
+<li><p>Other non-bayesian approaches for detecting out-of-distribution are presented in <a class="reference external" href="https://arxiv.org/abs/1610.02136">(Hendrinks and Gimpel, 2016)</a> and <a class="reference external" href="https://arxiv.org/abs/1706.04599">(Guo et al. 2017)</a> (temperature scaling)</p></li>
+</ul>
+</div>
+<div class="section" id="what-are-bayesian-neural-networks-posteriors-really-like">
+<h2>What are Bayesian Neural Networks Posteriors Really Like<a class="headerlink" href="#what-are-bayesian-neural-networks-posteriors-really-like" title="Permalink to this headline">¶</a></h2>
+<p>In <a class="reference external" href="https://arxiv.org/pdf/2104.14421.pdf">this work by (Izmailov et al. 2021)</a> deep neural networks are trained using Hamiltonian Monte Carlo (HMC). HMC (and MCMC methods in general) guarantees asymptotically exact samples from the true posterior.</p>
+<p>The authors recognize that training deep nets with MCMC is computationaly expensive to implement in practive, with respect to SVI. The focus of the paper is on evaluating how good are the approximate posteriors and deterministic approximations used on SVI. They show that</p>
+<ul class="simple">
+<li><p>BNN can perform better than regular training and deep ensembles</p></li>
+<li><p>A single HMC chain provides a comparable posterior to running several shorter chains</p></li>
+<li><p>Posterior tempering (temperature scaling) is actually not needed</p></li>
+<li><p>High variance Gaussian priors led to strong performance and results are robust to the scale. Performance using Gaussian, MoG and logistic priors is not too different. <strong>A vague prior in parameter space is not necessarily a vague prior in function space</strong>. This result is very conflicting with <a class="reference external" href="https://arxiv.org/pdf/2102.06571.pdf">(Fortuin et al. 2021)</a>!</p></li>
+<li><p>BNN have good performance on out-of-distribution samples but perform poorly under domain shift (ensembles are better in this case)</p></li>
+<li><p>The predictive distribution of the compared methods differs from that of HMC. Ensembles seem to be closer to HMC than mean-field VI (MFVI). But in terms of entropies they HMC is more overconfident than MFVI</p></li>
+</ul>
+</div>
+<div class="section" id="assorted-list-of-interesting-discussions">
+<h2>Assorted list of interesting discussions<a class="headerlink" href="#assorted-list-of-interesting-discussions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://cims.nyu.edu/~andrewgw/caseforbdl/">An interesting post by Andrew G. Wilson</a> on some misunderstandings about Bayesian deep learning and the difference with deep ensembles</p></li>
+<li><p><a class="reference external" href="https://wjmaddox.github.io/assets/BNN_tutorial_CILVR.pdf">A tutorial on Bayesian Neural Networks</a> by Wesley Maddox (from the group of A.G. Wilson). Fundamentals and recent works</p></li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/1802.02538.pdf">Yes, but Did it Work? Evaluating Variational Inference</a>: Two diagnostic algorithms to assess problems in variational approximations of posterior distributions</p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters/neural_networks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="bayesian.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Bayesian Neural Networks with <code class="docutils literal notranslate"><span class="pre">numpyro</span></code></p>
+        </div>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Pablo Huijse Heise<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

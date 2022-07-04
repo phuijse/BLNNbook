@@ -1,0 +1,667 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recent advances on VI &#8212; Bayesian Learning and Neural Networks</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="An introduction to Normalizing Flow models" href="nf.html" />
+    <link rel="prev" title="Stochastic Variational Inference with NumPyro" href="svi.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Bayesian Learning and Neural Networks</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Theoretical background
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/probabilities.html">
+   Probability Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/inference.html">
+   Statistical Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/information_theory.html">
+   Information Theoretic Quantities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/generative_models.html">
+   Matching probabilistic models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../numpyro/basics.html">
+   NumPyro Basics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Conjugate bayesian models
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bayesian/linear_regression.html">
+   Bayesian Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bayesian/pca.html">
+   Linear Latent Variable Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bayesian/gp1.html">
+   An theoretical introduction to Gaussian processes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Approximate inference
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="approx_inference.html">
+   Approximate Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="svi.html">
+   Stochastic Variational Inference with NumPyro
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Recent advances on VI
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nf.html">
+   An introduction to Normalizing Flow models
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Neural networks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../neural_networks/flax.html">
+   My first Neural Network with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     flax
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../neural_networks/ae.html">
+   Non-linear LVMs: AutoEncoders
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../neural_networks/vae.html">
+   Variational Autoencoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../neural_networks/bayesian.html">
+   Bayesian Neural Networks with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     numpyro
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../neural_networks/bayesian2.html">
+   More on Bayesian Neural Networks
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/variational/vi_advances.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phuijse/NNBL"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phuijse/NNBL/issues/new?title=Issue%20on%20page%20%2Fchapters/variational/vi_advances.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recap-from-previous-lectures">
+   Recap from previous lectures
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#more-flexible-approximate-posteriors-for-vi">
+   More flexible approximate posteriors for VI
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#normalizing-flows">
+     Normalizing flows
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-more-structure">
+     Adding more structure
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tigher-bounds-for-the-kl-divergence">
+   Tigher bounds for the KL divergence
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#importance-weighting">
+     Importance weighting
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#other-divergence-measures">
+   Other divergence measures
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#alpha-divergence">
+     <span class="math notranslate nohighlight">
+      \(\alpha\)
+     </span>
+     divergence
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#f-divergence">
+     f divergence
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stein-variational-gradient-descent-svgd">
+     Stein variational gradient descent (SVGD)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#operator-vi">
+     Operator VI
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Recent advances on VI</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recap-from-previous-lectures">
+   Recap from previous lectures
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#more-flexible-approximate-posteriors-for-vi">
+   More flexible approximate posteriors for VI
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#normalizing-flows">
+     Normalizing flows
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-more-structure">
+     Adding more structure
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tigher-bounds-for-the-kl-divergence">
+   Tigher bounds for the KL divergence
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#importance-weighting">
+     Importance weighting
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#other-divergence-measures">
+   Other divergence measures
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#alpha-divergence">
+     <span class="math notranslate nohighlight">
+      \(\alpha\)
+     </span>
+     divergence
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#f-divergence">
+     f divergence
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stein-variational-gradient-descent-svgd">
+     Stein variational gradient descent (SVGD)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#operator-vi">
+     Operator VI
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="recent-advances-on-vi">
+<h1>Recent advances on VI<a class="headerlink" href="#recent-advances-on-vi" title="Permalink to this headline">¶</a></h1>
+<p>For a survey of recent advances in Variational Inference, I highly recommend <a class="reference external" href="https://arxiv.org/pdf/1711.05597.pdf">Zhang et al 2018</a>. Some of the topics presented in this survey are discussed here</p>
+<div class="section" id="recap-from-previous-lectures">
+<h2>Recap from previous lectures<a class="headerlink" href="#recap-from-previous-lectures" title="Permalink to this headline">¶</a></h2>
+<p>We are interested in a posterior</p>
+<div class="math notranslate nohighlight">
+\[
+p(\theta|\mathcal{D}) = \frac{p(\mathcal{D}|\theta) p(\theta)}{p(\mathcal{D})}
+\]</div>
+<p>which may be intractable. If that is the case we do approximate inference either through sampling (MCMC) or optimization (VI).</p>
+<p>In the latter we select a (simple) approximate posterior <span class="math notranslate nohighlight">\(q_\nu(\theta)\)</span> and we optimize the parameters <span class="math notranslate nohighlight">\(\nu\)</span> by maximizing the evidence lower bound (ELBO)</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\log p(\mathcal{D}) \geq  \mathcal{L}(\nu) &amp;= - \int q_\nu(\theta) \log \frac{q_\nu(\theta)}{p(\mathcal{D}|\theta) p (\theta)} d\theta  \\
+&amp;= \mathbb{E}_{\theta \sim q_\nu(\theta)} \left[\log p(\mathcal{D}|\theta) \frac{p(\theta)}{q_\nu(\theta)}\right ]   \\
+&amp;= \mathbb{E}_{\theta \sim q_\nu(\theta)} \left[\log p(\mathcal{D}|\theta)\right]- D_{KL}[q_\nu(\theta) || p(\theta)]   
+\end{split}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+\hat \nu = \text{arg}\max_\nu \mathbb{E}_{\theta \sim q_\nu(\theta)} \left[\log p(\mathcal{D}|\theta)\right]- D_{KL}[q_\nu(\theta) || p(\theta)] 
+\]</div>
+<p>which makes <span class="math notranslate nohighlight">\(q_\nu(\theta)\)</span> close to <span class="math notranslate nohighlight">\(p(\theta|\mathcal{D})\)</span></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There is a trade-off between how flexible/expressive the posterior is and how simple is to approximate this expression</p>
+</div>
+<p>In what follows we review different ways to improve VI</p>
+</div>
+<div class="section" id="more-flexible-approximate-posteriors-for-vi">
+<h2>More flexible approximate posteriors for VI<a class="headerlink" href="#more-flexible-approximate-posteriors-for-vi" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="normalizing-flows">
+<h3>Normalizing flows<a class="headerlink" href="#normalizing-flows" title="Permalink to this headline">¶</a></h3>
+<p>One way to obtain a more flexible and still tractable posterior is to start with a simple distribution and apply a sequence of invertible transformations. This is the key idea behind normalizing flows.</p>
+<p>Let’s say that <span class="math notranslate nohighlight">\(z\sim q(z)\)</span> where <span class="math notranslate nohighlight">\(q\)</span> is simple, <em>e.g.</em> standard gaussian, and that there is a smooth and invertible transformation <span class="math notranslate nohighlight">\(f\)</span> such that <span class="math notranslate nohighlight">\(f^{-1}(f(z)) = z\)</span></p>
+<p>Then <span class="math notranslate nohighlight">\(z' = f(z)\)</span> is a random variable too but its distribution is</p>
+<div class="math notranslate nohighlight">
+\[
+q_{z'}(z') = q(z) \left| \frac{\partial f^{-1}}{\partial z'} \right| = q(z) \left| \frac{\partial f}{\partial z} \right|^{-1}
+\]</div>
+<p>which is the original distribution times the inverse of jacobian of the transformation</p>
+<p>And we can apply a chain of transformations <span class="math notranslate nohighlight">\(f_1, f_2, \ldots, f_K\)</span> obtaining</p>
+<div class="math notranslate nohighlight">
+\[
+q_K(z_K) = q_0(z_0) \prod_{k=1}^K \left| \frac{\partial f_k}{\partial z_{k-1}} \right|^{-1}
+\]</div>
+<p>With this we can go from a simple Gaussian to more expressive/complex/multi-modal distributions</p>
+<p>Nowadays several types of flows exist in the literature, <em>e.g.</em> planar, radial, autoregresive. As example, see this work in which <a class="reference external" href="https://arxiv.org/abs/1809.05861">normalizing flows were used to make the approximate posterior in VAE more expressive</a></p>
+<p>Key references:</p>
+<ul class="simple">
+<li><p>Dinh, Krueger and Bengio, <a class="reference external" href="https://arxiv.org/abs/1410.8516">“NICE: Non-linear Independent Components Estimation”</a></p></li>
+<li><p>Rezende and Mohamed, <a class="reference external" href="https://arxiv.org/abs/1505.05770">“Variational Inference with Normalizing Flows”</a></p></li>
+<li><p>Kingma and Dhariwal, <a class="reference external" href="https://arxiv.org/abs/1807.03039">“Glow: Generative Flow with Invertible 1x1 Convolutions”</a></p></li>
+</ul>
+</div>
+<div class="section" id="adding-more-structure">
+<h3>Adding more structure<a class="headerlink" href="#adding-more-structure" title="Permalink to this headline">¶</a></h3>
+<p>Another way to improve the variational approximation is to include auxiliary variables. For example in <a class="reference external" href="https://arxiv.org/abs/1602.05473">Auxiliary Deep Generative Models</a> the VAE was extended by introducing a variable <span class="math notranslate nohighlight">\(a\)</span> that does not modify the generative process but makes the approximate posterior more expressive</p>
+<p>In this case the graphical model of the approximate posterior is <span class="math notranslate nohighlight">\(q(a, z |x) = q(z|a,x)q(a|x)\)</span>, so that the marginal <span class="math notranslate nohighlight">\(q(z|x)\)</span> can fit more complicated posteriors. The graphical model of the generative process is <span class="math notranslate nohighlight">\(p(a,x,z) = p(a|x,z)p(x,z)\)</span>, <em>i.e.</em> under margnalization of <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(p(x,z)\)</span> is recovered</p>
+<p>The ELBO in this case is</p>
+<div class="math notranslate nohighlight">
+\[
+\log p(x) = \int_z \int_a \log p(a, x, z) dz dz \geq \mathbb{E}_{\theta \sim q_\nu(a|z,x)} \left[\log \frac{p_\theta(a|x,z)p_\theta(x|z)p(z)}{q_\nu(a|x)q_\nu(z|a,x)}\right ]  \nonumber
+\]</div>
+</div>
+</div>
+<div class="section" id="tigher-bounds-for-the-kl-divergence">
+<h2>Tigher bounds for the KL divergence<a class="headerlink" href="#tigher-bounds-for-the-kl-divergence" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="importance-weighting">
+<h3>Importance weighting<a class="headerlink" href="#importance-weighting" title="Permalink to this headline">¶</a></h3>
+<p>This is an idea based on importance sampling. Tigher bounds for the ELBO can be obtained by sampling several <span class="math notranslate nohighlight">\(z\)</span> for a given <span class="math notranslate nohighlight">\(x\)</span>. This was explored for autoencoders in <a class="reference external" href="https://arxiv.org/abs/1509.00519">Importance Weighted Autoencoders</a></p>
+<p>Let’s say we sample independently <span class="math notranslate nohighlight">\(K\)</span> times from the posterior, this yields progressively tighter lower bounds for the evidence:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}_k = \mathbb{E}_{z_K, \ldots, z_2, z_1 \sim q_\phi(z|x)} \log \frac{1}{K}\sum_{k=1}^K \frac{p_\theta(x, z_k)}{q_\phi(z_k|x)}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(w_k = \frac{p_\theta(x, z_k)}{q_\phi(z_k|x)}\)</span> are called the importance weights. Note that for <span class="math notranslate nohighlight">\(K=1\)</span> we recover the VAE bound.</p>
+<p>This tighter bound <a class="reference external" href="https://arxiv.org/pdf/1808.09034.pdf">has been shown to be equivalent to using the regular bound with a more complex posterior</a>. Recent discussion can be find in <a class="reference external" href="https://openreview.net/forum?id=HyZoi-WRb">Debiasing Evidence Approximations: On Importance-weighted Autoencoders and Jackknife Variational Inference</a> and <a class="reference external" href="https://arxiv.org/abs/1802.04537">Tighter Variational Bounds are Not Necessarily Better</a>.</p>
+</div>
+</div>
+<div class="section" id="other-divergence-measures">
+<h2>Other divergence measures<a class="headerlink" href="#other-divergence-measures" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="alpha-divergence">
+<h3><span class="math notranslate nohighlight">\(\alpha\)</span> divergence<a class="headerlink" href="#alpha-divergence" title="Permalink to this headline">¶</a></h3>
+<p>The KL divergence is computationally-convenient but there are other options to measure how far two distributions are. For example the family of <span class="math notranslate nohighlight">\(\alpha\)</span> divergences (Renyi’s formulation) is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+D_\alpha(p||q) = \frac{1}{\alpha -1} \log p(x)^\alpha q(x)^{1-\alpha} \,dx
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha\)</span> represents a trade-of between the mass-covering and zero-forcing effects. The KL corresponds to the special case <span class="math notranslate nohighlight">\(\alpha \to 1\)</span></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <span class="math notranslate nohighlight">\(\alpha\)</span> divergence has been explored for <a class="reference external" href="https://arxiv.org/pdf/1511.03243.pdf">VI recently</a> and is <a class="reference external" href="https://num.pyro.ai/en/latest/svi.html#numpyro.infer.elbo.RenyiELBO">implemented in <code class="docutils literal notranslate"><span class="pre">numpyro</span></code></a></p>
+</div>
+</div>
+<div class="section" id="f-divergence">
+<h3>f divergence<a class="headerlink" href="#f-divergence" title="Permalink to this headline">¶</a></h3>
+<p>The <span class="math notranslate nohighlight">\(\alpha\)</span> divergence is a particular case of the f-divergence</p>
+<div class="math notranslate nohighlight">
+\[
+D_f(p||q) =  q(x) f \left ( \frac{p(x)}{q(x)} \right) \,dx
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(f\)</span> is a convex function with <span class="math notranslate nohighlight">\(f(0) = 1\)</span>. The KL is recovered for <span class="math notranslate nohighlight">\(f(z) = z \log(z)\)</span></p>
+<p>In general <span class="math notranslate nohighlight">\(f\)</span> should defined such that the result in the bound does not depend on the marginal likelihood. <a class="reference external" href="https://papers.nips.cc/paper/7816-variational-inference-with-tail-adaptive-f-divergence.pdf">Wang, Liu and Liu, 2018</a> proposed tail-adaptive f-divergence</p>
+</div>
+<div class="section" id="stein-variational-gradient-descent-svgd">
+<h3>Stein variational gradient descent (SVGD)<a class="headerlink" href="#stein-variational-gradient-descent-svgd" title="Permalink to this headline">¶</a></h3>
+<p>Another totally different approach is based on the <strong>Stein operator</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{A}_p \phi(x) = \phi(x) \nabla_x \log p(x)  + \nabla_x \phi(x)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(p(x)\)</span> is a distribution and <span class="math notranslate nohighlight">\(\phi(x) = [\phi_1(x), \phi_2(x), \ldots, \phi_d(x)]\)</span> a smooth vector function</p>
+<p>Under this following, known as the <strong>Stein identity</strong>, holds</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}_{x\sim p(x)} \left [  \mathcal{A}_p \phi(x)  \right] = 0,
+\]</div>
+<p>Now, for another distribution <span class="math notranslate nohighlight">\(q(x)\)</span> with the same support as <span class="math notranslate nohighlight">\(p\)</span>, we can write</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}_{x\sim q(x)} \left [ \mathcal{A}_p \phi(x) \right] - \mathbb{E}_{x\sim q(x)} \left [ \mathcal{A}_q \phi(x) \right]= \mathbb{E}_{x\sim q(x)} \left [ \phi(x) ( \nabla_x \log p(x) - \nabla_x \log q(x)) \right]
+\]</div>
+<p>from which the <strong>Stein discrepancy</strong> between two distributions is defined</p>
+<div class="math notranslate nohighlight">
+\[
+\sqrt{S(q, p)} = \max_{\phi\in \mathcal{F}} \mathbb{E}_{x\sim q(x)} \left [ \mathcal{A}_p \phi(x) \right]
+\]</div>
+<p>Which to actually work requires <span class="math notranslate nohighlight">\(\mathcal{F}\)</span> to be broad enough</p>
+<p>This is were kernels can be used. By taking an infinite amount of basis function <span class="math notranslate nohighlight">\(\phi(x)\)</span> on the stein discrepancy it can be shown that the optimization is solved by</p>
+<div class="math notranslate nohighlight">
+\[
+\textbf{S}(q, p) = \mathbb{E}_{x, x' \sim q(x)} \left [ \mathcal{A}_p^x \mathcal{A}_p^{x'} \kappa(x, x')\right]
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\kappa\)</span> is a kernel function, <em>e.g.</em> RBF or rational quadratic. From this one can use stochastic gradient descent.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For a more in depth treatment see this <a class="reference external" href="https://www.cs.dartmouth.edu/~qliu/stein.html">list of papers related to SVGD</a></p>
+</div>
+</div>
+<div class="section" id="operator-vi">
+<h3>Operator VI<a class="headerlink" href="#operator-vi" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://arxiv.org/abs/1610.09033">Ranganath et al. 2016</a> proposed to replace the KL divergence as objective for VI with the Langevin-stein operator</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters/variational"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="svi.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Stochastic Variational Inference with NumPyro</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="nf.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">An introduction to Normalizing Flow models</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Pablo Huijse Heise<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

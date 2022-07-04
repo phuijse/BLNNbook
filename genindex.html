@@ -85,7 +85,12 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Theoretical background
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="chapters/fundamentals/probabilities.html">
    Probability Theory
@@ -107,15 +112,66 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="chapters/fundamentals/linear_regression.html">
-   Bayesian Linear Regression
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="chapters/numpyro/basics.html">
    NumPyro Basics
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Conjugate bayesian models
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/bayesian/linear_regression.html">
+   Bayesian Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/bayesian/pca.html">
+   Linear Latent Variable Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/bayesian/gp1.html">
+   An theoretical introduction to Gaussian processes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Approximate inference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/variational/approx_inference.html">
+   Approximate Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/variational/svi.html">
+   Stochastic Variational Inference with NumPyro
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/variational/vi_advances.html">
+   Recent advances on VI
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/variational/nf.html">
+   An introduction to Normalizing Flow models
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Neural networks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="chapters/neural_networks/flax.html">
    My first Neural Network with
@@ -124,21 +180,6 @@ const thebe_selector_output = ".output, .cell_output"
      flax
     </span>
    </code>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chapters/fundamentals/approx_inference.html">
-   Approximate Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chapters/numpyro/svi.html">
-   Stochastic Variational Inference with NumPyro
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="chapters/fundamentals/pca.html">
-   Linear Latent Variable Models
   </a>
  </li>
  <li class="toctree-l1">
@@ -162,8 +203,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="chapters/gaussian_processes/gp1.html">
-   An theoretical introduction to Gaussian processes
+  <a class="reference internal" href="chapters/neural_networks/bayesian2.html">
+   More on Bayesian Neural Networks
   </a>
  </li>
 </ul>

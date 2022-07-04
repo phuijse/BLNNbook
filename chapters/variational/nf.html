@@ -1,0 +1,564 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>An introduction to Normalizing Flow models &#8212; Bayesian Learning and Neural Networks</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="My first Neural Network with flax" href="../neural_networks/flax.html" />
+    <link rel="prev" title="Recent advances on VI" href="vi_advances.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Bayesian Learning and Neural Networks</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Theoretical background
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/probabilities.html">
+   Probability Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/inference.html">
+   Statistical Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/information_theory.html">
+   Information Theoretic Quantities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/generative_models.html">
+   Matching probabilistic models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../numpyro/basics.html">
+   NumPyro Basics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Conjugate bayesian models
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bayesian/linear_regression.html">
+   Bayesian Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bayesian/pca.html">
+   Linear Latent Variable Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bayesian/gp1.html">
+   An theoretical introduction to Gaussian processes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Approximate inference
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="approx_inference.html">
+   Approximate Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="svi.html">
+   Stochastic Variational Inference with NumPyro
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="vi_advances.html">
+   Recent advances on VI
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   An introduction to Normalizing Flow models
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Neural networks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../neural_networks/flax.html">
+   My first Neural Network with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     flax
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../neural_networks/ae.html">
+   Non-linear LVMs: AutoEncoders
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../neural_networks/vae.html">
+   Variational Autoencoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../neural_networks/bayesian.html">
+   Bayesian Neural Networks with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     numpyro
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../neural_networks/bayesian2.html">
+   More on Bayesian Neural Networks
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/variational/nf.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phuijse/NNBL"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phuijse/NNBL/issues/new?title=Issue%20on%20page%20%2Fchapters/variational/nf.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phuijse/NNBL/master?urlpath=tree/chapters/variational/nf.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#change-of-variables-formula">
+   Change of variables formula
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#planar-and-radial-flows">
+   Planar and Radial flows
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#composition-of-finite-flows">
+   Composition of finite flows
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#neural-spline-flow">
+   Neural spline flow
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#key-idea-nf-for-more-flexible-posteriors-in-vi">
+   Key idea: NF for more flexible posteriors in VI
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>An introduction to Normalizing Flow models</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#change-of-variables-formula">
+   Change of variables formula
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#planar-and-radial-flows">
+   Planar and Radial flows
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#composition-of-finite-flows">
+   Composition of finite flows
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#neural-spline-flow">
+   Neural spline flow
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#key-idea-nf-for-more-flexible-posteriors-in-vi">
+   Key idea: NF for more flexible posteriors in VI
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="an-introduction-to-normalizing-flow-models">
+<h1>An introduction to Normalizing Flow models<a class="headerlink" href="#an-introduction-to-normalizing-flow-models" title="Permalink to this headline">¶</a></h1>
+<p>Normalizing flows (NFs) are likelihood-based generative models, similar to VAE. The main difference is that the marginal likelihood <span class="math notranslate nohighlight">\(p(x)\)</span> of VAE is not tractable, hence relying on the ELBO. On the other hand, NF has a tractable marginal likelihood, i.e. we can write a direct expression for <span class="math notranslate nohighlight">\(\max \log p(x)\)</span></p>
+<p>In a nutshell NF is a composition of “simple” transformations (hence the name flow) applied to a “simple” distribution, in order to obtain a more complex distribution. NF have been extensively used to <a class="reference external" href="https://arxiv.org/pdf/1505.05770.pdf">obtain more flexible approximate posteriors in VI</a>, i.e. to  go beyond the mean field approximation.</p>
+<p>In this lesson we review the fundamental concepts and simple implementations of NF</p>
+<div class="section" id="change-of-variables-formula">
+<h2>Change of variables formula<a class="headerlink" href="#change-of-variables-formula" title="Permalink to this headline">¶</a></h2>
+<p>Let X and Z be <strong>continuous</strong> random variables <strong>having the same dimensionality</strong> and <span class="math notranslate nohighlight">\(f_\theta: \mathbb{R}^D \to \mathbb{R}^D\)</span> a parametric mapping such that <span class="math notranslate nohighlight">\(x = f_\theta(z)\)</span>, where <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(z\)</span> are samples from <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Z\)</span>, respectively.</p>
+<p>We will assumme that the mapping is <strong>invertible</strong>, <em>i.e.</em> <span class="math notranslate nohighlight">\(z=f_\theta^{-1}(x)\)</span></p>
+<p>In this case we have the following relation between the distributions marginal distributions <span class="math notranslate nohighlight">\(p_X(x)\)</span> and <span class="math notranslate nohighlight">\(p_Z(z)\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+p_X(x) &amp;= p_Z\left(f_\theta^{-1}(x)\right) \left| \text{det}\left( \frac{\partial f_\theta^{-1}}{\partial x} \right) \right| \nonumber \\
+&amp;= p_Z( z ) \left| \text{det}\left(\frac{\partial f_\theta}{\partial z} \right) \right|^{-1}
+\end{align}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(|\cdot|\)</span> is the absolute value and <span class="math notranslate nohighlight">\(\text{det}\)</span> is the determinant operator. This is known as the <a class="reference external" href="https://en.wikipedia.org/wiki/Probability_density_function#Function_of_random_variables_and_change_of_variables_in_the_probability_density_function">change of variables formula</a> for probability density functions. It comes from the fact that <span class="math notranslate nohighlight">\(\int p_X(x) dx = \int p_Z(z) dz = 1\)</span></p>
+<p>The determinant is only defined for square matrices. The matrix in this case is the jacobian of <span class="math notranslate nohighlight">\(f_\theta\)</span>, the matrix of partial derivatives. If the transformation is invertible the jacobian is an invertible matrix, hence <span class="math notranslate nohighlight">\(\text{det}(A^{-1}) = \text{det}(A)^{-1}\)</span></p>
+</div>
+<div class="section" id="planar-and-radial-flows">
+<h2>Planar and Radial flows<a class="headerlink" href="#planar-and-radial-flows" title="Permalink to this headline">¶</a></h2>
+<p>Several linear and nonlinear invertible transformations have been proposed. In what follows we review some of them starting from the so-called <a class="reference external" href="https://arxiv.org/pdf/1505.05770.pdf">planar flow</a></p>
+<div class="math notranslate nohighlight">
+\[
+x = f_\theta(z) = z + u h\left(\langle w, z \rangle + b\right)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\theta = (u, w, b)\)</span> and <span class="math notranslate nohighlight">\(h\)</span> is a smooth element-wise non linear function. This transformations can be interpreted as a contraction/expansion of the distribution in the direction perpendicular to the hyperplane <span class="math notranslate nohighlight">\(\langle w, z \rangle + b\)</span>, hence the name planar flow.</p>
+<p>A typical non-linear function is <span class="math notranslate nohighlight">\(\tanh\)</span>, in this case <span class="math notranslate nohighlight">\(w^T u \geq -1\)</span> is a sufficient condition for the invertibility of the transformation. This constraint is enforced by taking an arbitrary <span class="math notranslate nohighlight">\(u\)</span> and making it parallel to <span class="math notranslate nohighlight">\(w\)</span> using this vector instead (See the appendix <a class="reference external" href="https://arxiv.org/pdf/1505.05770.pdf">here</a>)</p>
+<p>In general computing the determinant of a <span class="math notranslate nohighlight">\(D \times D\)</span> has <span class="math notranslate nohighlight">\(\mathcal{O}(D)\)</span> complexity, hence it is convenient to look for transformations where the determinant of the jacobian is easy to compute. For planar flows the jacobian is</p>
+<div class="math notranslate nohighlight">
+\[
+\text{det}\left(\frac{\partial f_\theta}{\partial z} \right) = 1 + u^T h'\left(\langle w, z \rangle + b\right) w
+\]</div>
+<p>which can be computed in <span class="math notranslate nohighlight">\(\mathcal{O}(D)\)</span></p>
+<p>Another family of transformations consider contraction/expansion of the distribution around a reference point <span class="math notranslate nohighlight">\(z_0\)</span>, these are the radial flows</p>
+<div class="math notranslate nohighlight">
+\[
+f_\theta(z) = z + \frac{\beta}{\alpha + r} (z-z_0)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\theta=(z_0, \alpha, \beta)\)</span> and <span class="math notranslate nohighlight">\(r =  |z-z_0|\)</span>. A sufficient condition for invertibility is that <span class="math notranslate nohighlight">\(\frac{r\beta}{\alpha + r}\)</span> is non-decreasing, which can be forced by reparametrization of <span class="math notranslate nohighlight">\(\beta\)</span> as <span class="math notranslate nohighlight">\(\hat \beta = - \alpha + \log(1+e^\beta)\)</span></p>
+</div>
+<div class="section" id="composition-of-finite-flows">
+<h2>Composition of finite flows<a class="headerlink" href="#composition-of-finite-flows" title="Permalink to this headline">¶</a></h2>
+<p>For three random variables having the same dimensionality and two invertible parametric mappings such that <span class="math notranslate nohighlight">\(z_3 = f_{\theta}(z_2)\)</span> and  <span class="math notranslate nohighlight">\(z_2 = g_{\phi}(z_1)\)</span> we can use the change of variables to relate <span class="math notranslate nohighlight">\(z_3 = f_\theta(g_\phi(z_1))\)</span> also written as <span class="math notranslate nohighlight">\(z_3 = f_\theta \odot g_\phi (z_1)\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+p(z_3) = p(z_1) \left| \text{det}\left(\frac{\partial f_\theta}{\partial z_2} \right) \right|^{-1} \left| \text{det}\left(\frac{\partial g_\phi}{\partial z_1} \right) \right|^{-1}
+\]</div>
+<p>Different transformations can be used but it is more convenient to use one family and change only the parameters. We can generalize this to a finite composition of <span class="math notranslate nohighlight">\(K\)</span> random variables <span class="math notranslate nohighlight">\(z_K = f_{\theta_{K-1}} \odot f_{\theta_{K-2}} \odot \cdots \odot f_{\theta_{2}} \odot f_{\theta_{1}}(z_1)\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+p(z_K) = p(z_1) \prod_{k=1}^{K-1} \left| \text{det}\left(\frac{\partial f_{\theta_k}}{\partial z_k} \right) \right|^{-1} 
+\]</div>
+<p>or</p>
+<div class="math notranslate nohighlight">
+\[
+\log p(z_K) = \log p(z_1) - \sum_{k=1}^{K-1} \log \left| \text{det}\left(\frac{\partial f_{\theta_k}}{\partial z_k} \right) \right|
+\]</div>
+<p>This chain of succesive distribution transformations applied to <span class="math notranslate nohighlight">\(p(z_1)\)</span> is the normalizing flow.</p>
+<p>A key property of NFs is that for any function <span class="math notranslate nohighlight">\(h(z_K)\)</span> we can compute the expected value</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}_{z_K \sim p_K} [h(z_K)] = \mathbb{E}_{z_1 \sim p_1} [h\left(f_{\theta_{K-1}} \odot \cdots \odot f_{\theta_{1}}(z_1) \right)]
+\]</div>
+<p>by just applying the transformation and sampling for <span class="math notranslate nohighlight">\(p_1\)</span></p>
+<p>In this lesson we will not review other types of flows, e.g. <a class="reference external" href="https://arxiv.org/pdf/1505.05770.pdf">infinitesimal, Langevin and Hamiltonian flows</a></p>
+<p>The following figure from <a class="reference external" href="https://arxiv.org/pdf/1505.05770.pdf">(Jimenez-Rezende and Mohamed, 2016)</a> shows different finite-length sequences of planar and radial flows applied on simple distributions (gaussian and uniform).</p>
+<a class="reference internal image-reference" href="../../_images/NF1.png"><img alt="../../_images/NF1.png" src="../../_images/NF1.png" style="width: 800px;" /></a>
+<p>This shows that very complex distributions can be obtined from rather simple ones. Although note each transform tends to work on a very particular region of the space. What if the dimensionality is large? We would require an exponentially large number of transformations. This for example motivates <a class="reference external" href="https://arxiv.org/pdf/1803.05649.pdf">Sylvester flows</a> which propose a more flexible version of planar flow, hence requiring fewer transformations in the composition</p>
+<p>List of requirements for an ideal transformation</p>
+<ul class="simple">
+<li><p>Efficient evaluation of the inverse and log jacobian determinant (for density estimation)</p></li>
+<li><p>Analytical expression for the inverse (to draw samples)</p></li>
+<li><p>Flexible enough so that compositions are not too big</p></li>
+</ul>
+</div>
+<div class="section" id="neural-spline-flow">
+<h2>Neural spline flow<a class="headerlink" href="#neural-spline-flow" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://arxiv.org/abs/1906.04032">neural spline flow</a> proposes a transform based on rational-quadratic splines that is fully-differentiable and has a closed form (analytical) solution for its inverse.</p>
+<p>The spline is a curve composed of <span class="math notranslate nohighlight">\(K\)</span> rational-quadratic functions with boundaries defined by a set of <span class="math notranslate nohighlight">\(K+1\)</span> monotonically increasing <em>knots</em> or bins <span class="math notranslate nohighlight">\(\{(x^k, y^k)\}\)</span> starting in (-B, B) and ending in (B, B), where <span class="math notranslate nohighlight">\(B\)</span> is some predefined bound.</p>
+<a class="reference internal image-reference" href="../../_images/spline_nf.png"><img alt="../../_images/spline_nf.png" src="../../_images/spline_nf.png" style="width: 650px;" /></a>
+<p>The key is that the width and height of the bins are parameterized by a single layer fully connected neural network with a predefined number of hidden units. The network receives <span class="math notranslate nohighlight">\(x\)</span> and returns a set of parameters related to the bins and derivatives of the knots</p>
+</div>
+<div class="section" id="key-idea-nf-for-more-flexible-posteriors-in-vi">
+<h2>Key idea: NF for more flexible posteriors in VI<a class="headerlink" href="#key-idea-nf-for-more-flexible-posteriors-in-vi" title="Permalink to this headline">¶</a></h2>
+<p>The ELBO is tight when the approximate posterior <span class="math notranslate nohighlight">\(q(z|x)\)</span> matches the true posterior <span class="math notranslate nohighlight">\(p(z|x)\)</span>. But this equivalence may not occur if we are restricted to very simple approximate posteriors. NF might give the approximate variational posterior enough flexibility to match the actual posterior.</p>
+<p>For example this can be used to add more flexible posteriors in VAE as shown in the following figure from <a class="reference external" href="https://arxiv.org/pdf/1505.05770.pdf">(Jimenez-Rezende and Mohamed, 2016)</a></p>
+<a class="reference internal image-reference" href="../../_images/NF2.png"><img alt="../../_images/NF2.png" src="../../_images/NF2.png" style="width: 600px;" /></a>
+<p>The cost function in this case is</p>
+<a class="reference internal image-reference" href="../../_images/NF3.png"><img alt="../../_images/NF3.png" src="../../_images/NF3.png" style="width: 500px;" /></a>
+<p>where the approximate posterior <span class="math notranslate nohighlight">\(q_\phi(z|x)\)</span> is replaced by the flow distribution <span class="math notranslate nohighlight">\(q_K(z_K)\)</span>, a planar flow in this case.</p>
+<p>The algorithm to train the model is summarized as</p>
+<a class="reference internal image-reference" href="../../_images/NF4.png"><img alt="../../_images/NF4.png" src="../../_images/NF4.png" style="width: 450px;" /></a>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p>A VAE-flow framework that generalize to abstract conditional flows is described in <a class="reference external" href="https://arxiv.org/pdf/1809.05861.pdf">(Su and Wu, 2018)</a></p></li>
+<li><p>In this lesson the big family of autorregresive flows was omitted, I suggest <a class="reference external" href="http://proceedings.mlr.press/v80/huang18d.html">(Huang et al 2018)</a> to review recent advances</p></li>
+<li><p>A general methodology to build non linear flows: <a class="reference external" href="https://arxiv.org/abs/1410.8516">(Dinh et al 2014)</a></p></li>
+<li><p>An excellent tutorial by <a class="reference external" href="https://www.youtube.com/watch?v=u3vVyFVU_lI">M. Brubaker at ECCV 2020 on NF for images</a></p></li>
+<li><p>Awesome NF: <a class="reference external" href="https://github.com/janosh/awesome-normalizing-flows">https://github.com/janosh/awesome-normalizing-flows</a></p></li>
+</ul>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters/variational"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="vi_advances.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Recent advances on VI</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../neural_networks/flax.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">My first Neural Network with <code class="docutils literal notranslate"><span class="pre">flax</span></code></p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Pablo Huijse Heise<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

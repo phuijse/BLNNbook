@@ -1,0 +1,672 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>An theoretical introduction to Gaussian processes &#8212; Bayesian Learning and Neural Networks</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Approximate Inference" href="../variational/approx_inference.html" />
+    <link rel="prev" title="Linear Latent Variable Models" href="pca.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Bayesian Learning and Neural Networks</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Theoretical background
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/probabilities.html">
+   Probability Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/inference.html">
+   Statistical Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/information_theory.html">
+   Information Theoretic Quantities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/generative_models.html">
+   Matching probabilistic models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../numpyro/basics.html">
+   NumPyro Basics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Conjugate bayesian models
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="linear_regression.html">
+   Bayesian Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pca.html">
+   Linear Latent Variable Models
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   An theoretical introduction to Gaussian processes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Approximate inference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../variational/approx_inference.html">
+   Approximate Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../variational/svi.html">
+   Stochastic Variational Inference with NumPyro
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../variational/vi_advances.html">
+   Recent advances on VI
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../variational/nf.html">
+   An introduction to Normalizing Flow models
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Neural networks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../neural_networks/flax.html">
+   My first Neural Network with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     flax
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../neural_networks/ae.html">
+   Non-linear LVMs: AutoEncoders
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../neural_networks/vae.html">
+   Variational Autoencoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../neural_networks/bayesian.html">
+   Bayesian Neural Networks with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     numpyro
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../neural_networks/bayesian2.html">
+   More on Bayesian Neural Networks
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/bayesian/gp1.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phuijse/NNBL"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phuijse/NNBL/issues/new?title=Issue%20on%20page%20%2Fchapters/bayesian/gp1.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phuijse/NNBL/master?urlpath=tree/chapters/bayesian/gp1.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#defining-the-gaussian-process">
+   Defining the Gaussian process
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inference-with-a-gp">
+   Inference with a GP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-kernel">
+   The kernel
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#training-the-gp">
+   “Training” the GP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#relation-between-gps-and-neural-networks">
+   Relation between GPs and Neural Networks
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>An theoretical introduction to Gaussian processes</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#defining-the-gaussian-process">
+   Defining the Gaussian process
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inference-with-a-gp">
+   Inference with a GP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-kernel">
+   The kernel
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#training-the-gp">
+   “Training” the GP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#relation-between-gps-and-neural-networks">
+   Relation between GPs and Neural Networks
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="an-theoretical-introduction-to-gaussian-processes">
+<h1>An theoretical introduction to Gaussian processes<a class="headerlink" href="#an-theoretical-introduction-to-gaussian-processes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
+<p>Before training a neural network (deterministic or probabilistic) we have to <strong>select its architecture</strong>. For example, in the case of a multilayer perceptron (MLP), we need to choose the number of layers (depth) and the number of nodes (neurons) per layer (width)</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>With this we are defining the neural network as a <strong>function with fixed structure</strong></p>
+</div>
+<p>Increasing the width and depth gives the model more flexibility. But in general, we don’t know “how much flexibility” is needed for a particular problem</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The architecture is a collection of hyper-parameters</p>
+</div>
+<p>The good (and typical) practice is to find the “best structure” using a validation (holdout) dataset. But what if, instead of testing several architectures, we use a (non-parametric) model with no fixed structure?</p>
+<p>This lesson presents the <strong>Gaussian Process (GP)</strong>, a bayesian non-parametric model that can be seen as a neural network with one hidden layer and potentially infinite width</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In general, non-parametric models automatically grow in complexity (width) with data</p>
+</div>
+<p>Note that non-parametric models do have prior distributions and tunable hyper-parameters. The difference is that the distribution of its parameters lives in an infinite dimensional space. We use non-parametric models by integrating out (marginalizing) this infinite distribution</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Other non-parametric models not covered in this lesson are the many variants of the</p>
+<ul class="simple">
+<li><p>Dirichlet Process</p></li>
+<li><p>infinite Hidden Markov Model</p></li>
+<li><p>Indian Buffer Process</p></li>
+</ul>
+<p>See <a class="reference external" href="http://mlg.eng.cam.ac.uk/zoubin/talks/uai05tutorial-b.pdf">Zhoubin Ghahramadi’s tutorial</a> for a presentation of these methods</p>
+</div>
+</div>
+<div class="section" id="defining-the-gaussian-process">
+<h2>Defining the Gaussian process<a class="headerlink" href="#defining-the-gaussian-process" title="Permalink to this headline">¶</a></h2>
+<p>Consider the probabilistic linear regression problem from previous lessons</p>
+<div class="math notranslate nohighlight">
+\[
+y_i =  \sum_{k=1}^M \phi_k(x_i) \theta_k + \epsilon_i \quad \forall i=1,2,\ldots,N
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\epsilon_i\)</span> is <em>iid</em> Gausian and <span class="math notranslate nohighlight">\(\phi_k\)</span> is a collection of <span class="math notranslate nohighlight">\(M\)</span> (non-linear) basis functions</p>
+<p>We can write this in matrix form as</p>
+<div class="math notranslate nohighlight">
+\[
+Y = \Phi(X) \theta + E
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(E\)</span> is a diagonal matrix and <span class="math notranslate nohighlight">\(\Phi(X) \in \mathbb{R}^{N \times M}\)</span></p>
+<p>Let’s set a Gaussian prior for <span class="math notranslate nohighlight">\(\theta\)</span> :</p>
+<div class="math notranslate nohighlight">
+\[
+p(\theta) = \mathcal{N}(0,  \sigma_\theta^2 I)
+\]</div>
+<p>What is the distribution of <span class="math notranslate nohighlight">\(f_\theta(X) = \Phi(X) \theta\)</span> in this case? If <span class="math notranslate nohighlight">\(\Phi\)</span> is a deterministic transformation then the distribution of <span class="math notranslate nohighlight">\(f\)</span> is also Gaussian</p>
+<p>By our previous definitions, the mean of <span class="math notranslate nohighlight">\(p(f)\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}[f_\theta(X)] = \Phi(X)\mathbb{E}[\theta] = 0
+\]</div>
+<p>and its covariance is</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}[ f_\theta(X) f_\theta(X)^T] =  \Phi(X)\mathbb{E}[\theta \theta^T ] \Phi(X)^T = \sigma_\theta^2 \Phi(X) \Phi(X)^T = K
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(K \in \mathbb{R}^{N\times N}\)</span> is a symmetric and positive-definite matrix called the <strong>Gram matrix</strong> or <strong>Gramian matrix</strong>.</p>
+<p>The <span class="math notranslate nohighlight">\(ij\)</span>-th element of the gram matrix is</p>
+<div class="math notranslate nohighlight">
+\[
+K_{ij} = \sum_{k=1}^M \phi_k(x_i) \phi_k(x_j) = \left \langle \vec \phi(x_i) , \vec \phi(x_j) \right \rangle = \kappa(x_i, x_j)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\kappa(\cdot, \cdot): \mathcal{X} \times \mathcal{X} \to \mathbb{R}\)</span> is called the <strong>kernel</strong>. In general we will forget about <span class="math notranslate nohighlight">\(\{\phi_k(\cdot)\}\)</span> and work only with the kernel.</p>
+<p>With all these we can finally write</p>
+<div class="math notranslate nohighlight">
+\[
+p(f) = \mathcal{N}(0, K)
+\]</div>
+<p>which is a “prior over functions”.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We have dropped the dependence on <span class="math notranslate nohighlight">\(\theta\)</span></p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><span class="math notranslate nohighlight">\(f\)</span> is a multivariate random variable (random process) with joint Gaussian distribution: <span class="math notranslate nohighlight">\(f\)</span> is a <strong>Gaussian Process</strong></p>
+</div>
+</div>
+<div class="section" id="inference-with-a-gp">
+<h2>Inference with a GP<a class="headerlink" href="#inference-with-a-gp" title="Permalink to this headline">¶</a></h2>
+<p>Consider a dataset <span class="math notranslate nohighlight">\(\textbf{x}=(x_1, x_2)\)</span>, <span class="math notranslate nohighlight">\(\textbf{y}=(y_1, y_2)\)</span>. With this dataset we are interested in predicting (inferring) for a new observation <span class="math notranslate nohighlight">\(x^*\)</span>: <span class="math notranslate nohighlight">\(f(x^*)\)</span> or <span class="math notranslate nohighlight">\(f^*\)</span> for short. This corresponds to the posterior <span class="math notranslate nohighlight">\(p(f^*|\textbf{y}, \textbf{x}, x^*)\)</span></p>
+<p>As before we can write the joint (Gaussian) distribution between the dataset and the new sample as</p>
+<div class="math notranslate nohighlight">
+\[
+p(\textbf{y}, f^*|\textbf{x}, x^*) = \mathcal{N}(0, K^+)
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+K^+ = \begin{pmatrix} K_{\textbf{x}\textbf{x}} + \sigma_\epsilon^2 I &amp; K_{\textbf{x}x^*} \\ K_{\textbf{x}x^*}^T &amp; K_{x^*x^*} \end{pmatrix}
+\end{split}\]</div>
+<p>is a block matrix and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+K_{\textbf{x}\textbf{x}} = \begin{pmatrix} \kappa(x_1, x_1) &amp; \kappa(x_1, x_2) \\ \kappa(x_1, x_2) &amp; \kappa(x_2, x_2)\end{pmatrix}, \quad K_{\textbf{x}x^*} = \begin{pmatrix} \kappa(x_1, x^*) \\ \kappa(x_2, x^*) \end{pmatrix}
+\end{split}\]</div>
+<p>The Gaussian distribution is closed under conditioning, i.e. if we have a joint gaussian distribution the conditional distribution of a variable given the others is gaussian (<a class="reference external" href="https://fabiandablander.com/statistics/Two-Properties.html">nice step by step example</a>). Here we use this property to write</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+p(f^*|\textbf{y}, \textbf{x}, x^*) = \mathcal{N}(&amp;K_{\textbf{x}x^*} (K_{\textbf{x}\textbf{x}}+I\sigma_\epsilon^2)^{-1} \textbf{y},  \\
+&amp; K_{x^*x^*} - K_{\textbf{x}x^*} (K_{\textbf{x}\textbf{x}}+I\sigma_\epsilon^2)^{-1} K_{\textbf{x}x^*}^T ) 
+\end{split}
+\end{split}\]</div>
+<p>which gives us the result we seek</p>
+<p>We can use Gaussian conditioning to predict on several “new data points” at the same time, we only need to compute the sub gram matrices between and within the training set and the test set</p>
+<a class="reference internal image-reference" href="../../_images/gram_matrix_block.png"><img alt="../../_images/gram_matrix_block.png" src="../../_images/gram_matrix_block.png" style="width: 300px;" /></a>
+</div>
+<div class="section" id="the-kernel">
+<h2>The kernel<a class="headerlink" href="#the-kernel" title="Permalink to this headline">¶</a></h2>
+<p>The GP is mainly defined by its covariance also known as the gram matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+K = \begin{pmatrix} 
+\kappa(x_1, x_1)&amp; \kappa(x_1, x_2)&amp; \ldots &amp; \kappa(x_1, x_N) \\
+\kappa(x_2, x_1)&amp; \kappa(x_2, x_2)&amp; \ldots &amp; \kappa(x_2, x_N) \\
+\vdots&amp; \vdots&amp; \ddots &amp; \vdots \\
+\kappa(x_N, x_1)&amp; \kappa(x_N, x_2)&amp; \ldots &amp; \kappa(x_N, x_N) \\
+\end{pmatrix}
+\end{split}\]</div>
+<p>where the following relation between the kernel and the basis function</p>
+<div class="math notranslate nohighlight">
+\[
+\kappa(x_i, x_j) = \left \langle \vec \phi(x_i) , \vec \phi(x_j) \right \rangle 
+\]</div>
+<p>is known as the “<a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_method#Mathematics:_the_kernel_trick">kernel trick</a>”.</p>
+<p>Before we defined a finite dimensional <span class="math notranslate nohighlight">\(\vec \phi\)</span> and obtained <span class="math notranslate nohighlight">\(\kappa\)</span>. But in general it is more interesting to skip <span class="math notranslate nohighlight">\(\phi\)</span> and design <span class="math notranslate nohighlight">\(\kappa\)</span> directly. We only need <span class="math notranslate nohighlight">\(\kappa\)</span> to be a <strong>symmetric and positive-definite function</strong></p>
+<p>The broadly used Gaussian kernel complies with these restrictions</p>
+<div class="math notranslate nohighlight">
+\[
+\kappa(x_i, x_j) = \sigma^2 \exp \left ( \frac{\|x_i - x_j \|^2}{2\ell^2} \right)
+\]</div>
+<p>where hyperparameter <span class="math notranslate nohighlight">\(\sigma\)</span> controls the amplitude and <span class="math notranslate nohighlight">\(\ell\)</span> controls the length-scale of the interactions between samples.</p>
+<p>Using a taylor expansion we can show that the (non-linear) basis function of this kernel is</p>
+<div class="math notranslate nohighlight">
+\[
+\phi(x) = \lim_{M\to\infty} \sigma^2 \exp\left({-\frac{\|x\|^2}{2\ell^2}}\right) \begin{pmatrix} 1 &amp; \frac{x}{\ell} &amp; \frac{x^2}{\ell^2 \sqrt{2}} &amp; \cdots &amp; \frac{x^M}{\ell^M \sqrt{M!}}  \end{pmatrix}
+\]</div>
+<p><em>i.e.</em> the Gaussian kernel induces an infinite-dimensional basis function.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A Gaussian process with Gaussian kernel has an implicit infinite dimensional parameter vector <span class="math notranslate nohighlight">\(\theta\)</span></p>
+</div>
+<p>We are not anymore explicitely choosing the structure of the function, but by selecting a kernel we are choosing a general “behavior”. For example, the Gaussian kernels encodes the property of locality, <em>i.e.</em> closer data samples should have similar predictions.</p>
+<p>Several other valid kernels exist which encode other properties such as trends and periodicity. The following picture from Mackay’s book shows some of them:</p>
+<a class="reference internal image-reference" href="../../_images/kernels_mackay.png"><img alt="../../_images/kernels_mackay.png" src="../../_images/kernels_mackay.png" style="width: 800px;" /></a>
+<ul class="simple">
+<li><p>The top plots are Gaussian kernels with different lengthscales</p></li>
+<li><p>The bottom left plot is a periodic kernel</p></li>
+<li><p>The bottom right plot is a Gaussian kernel plus a linear kernel</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Sums of products of valid kernels are also valid kernels</p>
+</div>
+</div>
+<div class="section" id="training-the-gp">
+<h2>“Training” the GP<a class="headerlink" href="#training-the-gp" title="Permalink to this headline">¶</a></h2>
+<p>Fitting a GP to a dataset corresponds to finding the best combination of kernel hyperparameters which can be done by maximizing the marginal likelihood</p>
+<p>For regression with iid Gaussian noise the marginal likelihood <span class="math notranslate nohighlight">\(y\)</span> is also Gaussian</p>
+<div class="math notranslate nohighlight">
+\[
+p(\textbf{y}|\textbf{x}) = \int p(\textbf{y}|f) p(f) \,df = \mathcal{N}(0, K + \sigma_\epsilon^2 I )
+\]</div>
+<p>where the hyperparameter <span class="math notranslate nohighlight">\(\sigma_\epsilon^2\)</span> is the variance of the noise</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is equivalent and much easier to maximize the log marginal likelihood:</p>
+<div class="math notranslate nohighlight">
+\[
+\log p(\textbf{y}|\textbf{x}) = -\frac{1}{2} \textbf{y}^T (K + \sigma_\epsilon^2I)^{-1} \textbf{y} - \frac{1}{2} \log | 2\pi (K + \sigma_\epsilon^2I) |
+\]</div>
+<p>from which we compute derivatives to update the hyperparameters through gradient descent</p>
+</div>
+<p>The following picture from Barber’s book shows three examples drawn from the GP prior (gaussian kernel) on the left and the mean/variance of the GP posterior after training on the right</p>
+<a class="reference internal image-reference" href="../../_images/gp_fitted.png"><img alt="../../_images/gp_fitted.png" src="../../_images/gp_fitted.png" style="width: 700px;" /></a>
+</div>
+<div class="section" id="relation-between-gps-and-neural-networks">
+<h2>Relation between GPs and Neural Networks<a class="headerlink" href="#relation-between-gps-and-neural-networks" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.446.9306&amp;rep=rep1&amp;type=pdf">(Neil 1994)</a> showed that a fully connected neural network with one hidden layer tends to a Gaussian process in the limit of infinite hidden units as a consequence of the central limit theorem. The following shows a <a class="reference external" href="https://pillowlab.wordpress.com/2019/04/14/deep-neural-networks-as-gaussian-processes/">mumary of the proof</a></p>
+<p>More recently, several works have explored the relationship between GPs and Deep Neural Networks:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://openreview.net/forum?id=B1EA-M-0Z">A recursive GP kernel that is related to infinitely-wide multi-layer dense neural networks</a>. A similar relation is explored <a class="reference external" href="https://arxiv.org/abs/1804.11271">here</a>. <a class="reference external" href="https://arxiv.org/abs/1906.01930">This paper</a> relates the training of GP and BNN and show that a GP kernel can be obtained from VI (gaussian distributions), hence relating the posteriors</p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/1211.0358">Deep Gaussian processes</a>: Composition (stacks) of GPs. Note that this is not the same as function (kernel)composition. <a class="reference external" href="http://inverseprobability.com/talks/notes/deep-gaussian-processes.html">Excellent tutorial by Neil Lawrence</a> that covers sparse and deep GPs. DGP are less used in practice than BNN due to their higher cost but they can be combined as <a class="reference external" href="https://arxiv.org/abs/2105.04504">shown here</a> and also more efficient methods to train them have been <a class="reference external" href="https://arxiv.org/pdf/1602.04133.pdf">proposed</a>. Finally, the following is a <code class="docutils literal notranslate"><span class="pre">pyro</span></code> demonstration of a two layer DGP trained with MCMC: <a class="reference external" href="https://fehiepsi.github.io/blog/deep-gaussian-process/">https://fehiepsi.github.io/blog/deep-gaussian-process/</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/2007.05864">Neural Tangent Kernel (NTK)</a>: A modification to deep ensemble training so that they can be interpreted as a GP predictive posterior in the infinite width limit. The NTK was introduced in <a class="reference external" href="https://arxiv.org/abs/1806.07572">(Jacot, Gabriel and Hongler, 2018)</a> as a description of the training evolution of deep NNs using kernel methods</p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/1511.02222">Deep kernel learning</a>: The inputs of a spectral mixture kernel are transformed with deep neural networks. Solution has a closed form and can replace existing kernels easily. Available as a <code class="docutils literal notranslate"><span class="pre">pyro</span></code> <a class="reference external" href="http://pyro.ai/examples/dkl.html">example</a></p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For more on GP please see</p>
+<ul class="simple">
+<li><p>Mackay’s book, chapter 45 on Gaussian Proceses</p></li>
+<li><p>Barber’s book, chapter 19 on Gaussian Processes</p></li>
+<li><p><a class="reference external" href="http://gaussianprocess.org/gpml/">Rasmussen &amp; Willams, “Gaussian Process for Machine Learning”</a></p></li>
+</ul>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters/bayesian"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="pca.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Linear Latent Variable Models</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../variational/approx_inference.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Approximate Inference</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Pablo Huijse Heise<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
